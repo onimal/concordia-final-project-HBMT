@@ -4,9 +4,19 @@
   "private": true,
   "proxy": "http://localhost:8000",
   "dependencies": {
+    "@date-io/date-fns": "^2.13.1",
+    "@date-io/moment": "^2.13.1",
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
+    "@mui/lab": "^5.0.0-alpha.77",
+    "@mui/material": "^5.6.1",
+    "@mui/styled-engine": "npm:@mui/styled-engine-sc@latest",
+    "@mui/styled-engine-sc": "^5.6.1",
+    "@mui/x-date-pickers": "^5.0.0-alpha.1",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
+    "moment": "^2.29.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-icons": "^4.3.1",
@@ -14,6 +24,9 @@
     "react-scripts": "5.0.0",
     "styled-components": "^5.3.5",
     "web-vitals": "^2.1.4"
+  },
+  "resolutions": {
+    "@mui/styled-engine": "npm:@mui/styled-engine-sc@latest"
   },
   "scripts": {
     "start": "react-scripts start",
