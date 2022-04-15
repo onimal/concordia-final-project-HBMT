@@ -8,25 +8,23 @@ const helmet = require("helmet");
 const PORT = 8000;
 
 //handlers
-//const {
-//    getSomething,
-//    postSomething,
-//    ...
-//} = require("./handlers")
+const {getAppointments} = require("./handlers/GetAppointments")
+const {createNewAppointment} = require("./handlers/CreateNewAppointment")
+const {createTherapist} = require("./handlers/CreateTherapist")
+
 
 //server
 express()
 
+    .use(express.json())
     .use(morgan("tiny"))
     .use(helmet())
     .use(cors())
 
     //endpoints
-
-    //Create endpoints here
-    //.get("/...", getSomething)
-
-
+    .get('/appointments', getAppointments)    
+    .post('/appointments', createNewAppointment)
+    .post('/therapists', createTherapist)
 
 
     .listen(PORT, () => console.info(`Listening on port ${PORT}`));
