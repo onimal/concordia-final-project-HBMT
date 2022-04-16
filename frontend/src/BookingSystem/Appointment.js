@@ -1,10 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import styled from "styled-components";
 import moment from "moment";
 
 
-import Card from "@mui/material/Card";
 import {AdapterMoment} from "@mui/x-date-pickers/AdapterMoment";
 import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider";
 import {DatePicker} from "@mui/x-date-pickers/DatePicker";
@@ -15,23 +14,16 @@ import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
 
 
-const AppointmentCard = () => {
+const Appointment = () => {
 
-    
+    const [status, setStatus] = useState("loading");
+
     const [selectedDate, setSelectedDate] = useState(new Date());
-    const [selectedLocation, setSelectedLocation] = useState("");
-    const [selectedTherapist, setSelectedTherapist] = useState("");
+    const [selectedLocation, setSelectedLocation] = useState("Clinic");
+    const [selectedTherapist, setSelectedTherapist] = useState("Hélène Blat");
     const [selectedMassageType, setSelectedMassageType] = useState("");
     
-    
-    
     const appointmentDate = moment(selectedDate).format('MMMM Do YYYY, h:mm a')
-
-
-    console.log(appointmentDate);
-    console.log(selectedLocation);
-    console.log(selectedTherapist);
-    console.log(selectedMassageType);
 
 
     const handleDateChange = (date) => {
@@ -50,16 +42,22 @@ const AppointmentCard = () => {
         setSelectedMassageType(event.target.value);
     }
 
-    fetch('/appointments')
-            .then((res) => res.json())
-            .then((data) => {
-                //console.log(data)
-            })
+    
     
     
     const submitNewAppointment = () => {
 
+        fetch('/appointments')
+            .then((res) => res.json())
+            .then((data) => {
                 
+                //POST date && therapist => to endpoint with findOne()
+                //if not exist in response, next fetch "POST" can run
+                
+                
+                console.log(data)
+                
+            })
         
         
         
@@ -79,8 +77,12 @@ const AppointmentCard = () => {
             })
             
         })
-        .then((res) => res.json())
-        .then((res) => console.log())
+            .then((res) => res.json())
+            .then((res) => console.log())
+            .catch((error) => {
+                setStatus(error);
+            })
+        
     }
 
 
@@ -187,20 +189,21 @@ const Wrapper = styled.div`
 
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
-
 `
 
-const CardWrapper = styled(Card)`
+const CardWrapper = styled.div`
 
-    height: 90%;
-    width: 50%;
+    height: 85vh;
+    width: 98vw;
+    margin-top: 0px;
+    border-radius: 0px 0px 15px 15px;
+    background-color: white;
+    box-shadow: 1px 8px 8px #888888;
     display: grid;
     grid-template-rows: 10% 80% 10%;
-    justify-content: center;   
-`
+    justify-content: center;  
 
+`
 const TitleArea = styled.div`    
     justify-self: center;
     align-self: center;
@@ -258,4 +261,4 @@ const ButtonsArea = styled.div`
 const BookButton = styled(Button)`
 `
 
-export default AppointmentCard;
+export default Appointment;
