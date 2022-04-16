@@ -73,6 +73,7 @@ const GlobalStyles = createGlobalStyle`
         content: '';
         content: none;
     }
+    
 `;
 
 export default GlobalStyles;
