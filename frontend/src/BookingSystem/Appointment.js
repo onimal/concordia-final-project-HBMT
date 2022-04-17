@@ -19,6 +19,7 @@ import TextField from "@mui/material/TextField";
 const Appointment = () => {
 
     const [status, setStatus] = useState("loading");
+    const [dialog, setDialog] = useState("");
 
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [selectedSlot, setSelectedSlot] = useState("100");
@@ -52,23 +53,9 @@ const Appointment = () => {
     const handleDurationChange = (event) => {
         setSelectedDuration(event.target.value);
     }
-    
+
     
     const submitNewAppointment = () => {
-
-        fetch('/appointments')
-            .then((res) => res.json())
-            .then((data) => {
-                
-                //POST date && therapist => to endpoint with findOne()
-                //if not exist in response, next fetch "POST" can run
-                
-                
-                console.log(data)
-                
-            })
-        
-        
         
         fetch('/appointments', {
             method: "POST",
@@ -89,9 +76,18 @@ const Appointment = () => {
             
         })
             .then((res) => res.json())
-            .then((res) => console.log())
+            .then((res) => 
+                {
+                    if (res.status === 409){
+                        setStatus("error")
+                        setDialog("Non disponible, veuillez choisir un autre thérapeute, ou un autre horaire.")
+                    } else if(res.status === 201) {
+                        setStatus("success")
+                        setDialog("Votre rendez-vous est confirmé, merci !")
+                    }                
+                })
             .catch((error) => {
-                setStatus(error);
+                setStatus("error");
             })
         
     }
@@ -212,7 +208,10 @@ const Appointment = () => {
             </AppointmentArea>
             <Footer>
                 <Dialog>
-
+                    {status === "error"
+                    ?<ErrorMsg>{dialog}</ErrorMsg>
+                    :<ConfirmationMsg>{dialog}</ConfirmationMsg>
+                    }
                 </Dialog>
                 <BookButton
                     onClick={submitNewAppointment}
@@ -445,8 +444,17 @@ const Dialog = styled.div`
     width: 50vw;
     height: 50px;
     display: flex;
-    justify-content: flex-start;
-    border: solid 1px black;
+    justify-content: center;
+    align-items: center;
+    //border: solid 1px black;
+`
+const ErrorMsg = styled.p`
+    font-size: 20px;
+    color: #f54248;
+`
+const ConfirmationMsg = styled.p`
+    font-size: 20px;
+    color: #629147;
 `
 const BookButton = styled.button`
 
