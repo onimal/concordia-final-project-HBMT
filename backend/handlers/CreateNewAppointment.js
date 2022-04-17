@@ -17,11 +17,29 @@ const createNewAppointment = async (req, res) => {
     try {
         await client.connect();
         const db = client.db("HBMT");
-        const result = await db.collection("Appointments").insertOne({
-            ...req.body,
-            _id: uuidv4(),
-        });
-        res.status(201).json({status:201, data: req.body});
+        console.log(req.body.slot);
+        
+
+        const searchHistory = await db.collection("Appointments").find({
+
+            "date": req.body.date,
+            "slot": req.body.slot,
+            "therapist": req.body.therapist
+        }).toArray();
+
+        console.log(searchHistory);
+
+        if (searchHistory.length === 0) {
+
+            const result = await db.collection("Appointments").insertOne({
+                ...req.body,
+                _id: uuidv4(),
+            });
+            res.status(201).json({status:201, data: req.body});
+        } else {
+            res.status(409).json({status:409, message: "Slot not available"})
+        }
+        
     } catch (err) {
         res.status(500).json({status:500, data: req.body, message: err.message})
     }
