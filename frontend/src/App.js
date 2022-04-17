@@ -7,7 +7,7 @@ import Header from "./Header";
 import Homepage from "./Homepage";
 import Bio from "./Bio";
 import Services from "./Services";
-import Appointment from "./BookingSystem/Appointment";
+import Appointment from "./Appointment";
 import Contact from "./Contact";
 
 function App() {

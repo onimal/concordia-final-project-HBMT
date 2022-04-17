@@ -53,6 +53,7 @@ const GlobalStyles = createGlobalStyle`
         border: 0;
         font-size: 100%;
         vertical-align: baseline;
+        color: #7e9e6c;
         
     }
     /* HTML5 display-role reset for older browsers */
