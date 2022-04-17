@@ -13,6 +13,8 @@ const Bio = () => {
 
 const Wrapper = styled.div`
 
+    width: 100vw;
+    min-width: 640px;
     display: flex;
     justify-content: center;
 `
