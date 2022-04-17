@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import styled from "styled-components";
 import moment from "moment";
@@ -24,12 +24,10 @@ const Appointment = () => {
     const [selectedSlot, setSelectedSlot] = useState("100");
     const [selectedLocation, setSelectedLocation] = useState("Clinic");
     const [selectedTherapist, setSelectedTherapist] = useState("Hélène Blat");
-    const [selectedMassageType, setSelectedMassageType] = useState("");
-    const [selectedDuration, setSelectedDuration] = useState("");
+    const [selectedMassageType, setSelectedMassageType] = useState("Suédois");
+    const [selectedDuration, setSelectedDuration] = useState("60");
     
-    const appointmentDate = moment(selectedDate).format('MMMM Do YYYY, h:mm a')
-
-    //console.log(selectedSlot)
+    const appointmentDate = moment(selectedDate).format('MMMM Do YYYY');
 
     const handleDateChange = (date) => {
         setSelectedDate(date._d);
@@ -37,7 +35,6 @@ const Appointment = () => {
 
     const handleSlotChange = (event) => {
         setSelectedSlot(event.target.value);
-        
     }
     
     const handleLocationChange = (event) => {
@@ -213,11 +210,14 @@ const Appointment = () => {
                     </CustomerInfoWrapper>
                 </CustomerInfoArea>
             </AppointmentArea>
-            <ButtonsArea>
+            <Footer>
+                <Dialog>
+
+                </Dialog>
                 <BookButton
                     onClick={submitNewAppointment}
                 >Réservez votre massage</BookButton>
-            </ButtonsArea>
+            </Footer>
             </MainArea>
         </Wrapper>
     )
@@ -432,16 +432,40 @@ const CustomerInfoWrapper = styled.div`
     
 `
 
-const ButtonsArea = styled.div`
-
+const Footer = styled.div`
+    //height: 30vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    //justify-content: center;
+    align-items: center;
+    gap: 30px;
 
+`
+const Dialog = styled.div`
+    width: 50vw;
+    height: 50px;
+    display: flex;
+    justify-content: flex-start;
+    border: solid 1px black;
 `
 const BookButton = styled.button`
 
+    all: unset;
     height: 50px;
+    width: 300px;
     background-color: transparent;
+    border: solid 1px #7e9e6c;
+    border-radius: 10px;
+    color: #7e9e6c;
+    font-size: 20px;
+    font-variant-caps: small-caps;
+    text-align: center;
+    :hover{
+        color: whitesmoke;
+        background-color: #7e9e6c;
+        
+    }
+    
 `
 
 export default Appointment;
