@@ -20,6 +20,7 @@ import { ImSpinner3 } from "react-icons/im";
 const Appointment = () => {
 
     const [status, setStatus] = useState("idle");
+    const [customerCreationStatus, setCustomerCreationStatus] = useState("")
     const [dialog, setDialog] = useState("");
 
     const [selectedDate, setSelectedDate] = useState(new Date());
@@ -147,6 +148,39 @@ const Appointment = () => {
                 setStatus("error");
             })
         
+        fetch('/customers', {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                
+            },
+            body: JSON.stringify({
+
+                lastname: customerLastName,
+                firstname: customerFirstName,
+                email: customerEmail,
+                phone: customerPhone,
+                address: customerAddress,
+                zipcode: customerZipCode,
+                city: customerCity
+            })
+            
+        })
+            .then((res) => res.json())
+            .then((res) => 
+                {
+                    if (res.status === 409){
+                        setCustomerCreationStatus("conflict: customer already in database")
+                        
+                    } else if(res.status === 201) {
+                        setCustomerCreationStatus("success: new customer created")
+                        
+                    }                
+                })
+            .catch((error) => {
+                setStatus("error");
+            })
     }
 
 
@@ -258,23 +292,23 @@ const Appointment = () => {
                 <CustomerInfoArea>                        
                         <CustomerTitle>Parlez-nous de vous</CustomerTitle>
                         <CustomerInfoWrapper>
-                            <CustomerLastNameLabel for="lname">Nom</CustomerLastNameLabel>
+                            <CustomerLastNameLabel htmlFor="lname">Nom</CustomerLastNameLabel>
                             <CustomerLastName type="text" id="lname" name="lname" onChange={handleCustomerLastNameChange} value={customerLastName}/>                        
-                            <CustomerFirstNameLabel for="fname">Prénom</CustomerFirstNameLabel>
+                            <CustomerFirstNameLabel htmlFor="fname">Prénom</CustomerFirstNameLabel>
                             <CustomerFirstName type="text" id="fname" name="fname" onChange={handleCustomerFirstNameChange} value={customerFirstName}/>                        
-                            <CustomerEmailLabel for="email">Courriel</CustomerEmailLabel>
+                            <CustomerEmailLabel htmlFor="email">Courriel</CustomerEmailLabel>
                             <CustomerEmail type="email" id="email" name="email" onChange={handleCustomerEmailChange} value={customerEmail}/>                            
-                            <CustomerPhoneLabel for="phone">Téléphone</CustomerPhoneLabel>
+                            <CustomerPhoneLabel htmlFor="phone">Téléphone</CustomerPhoneLabel>
                             <CustomerPhone type="tel" id="phone" name="phone" onChange={handleCustomerPhoneChange} value={customerPhone}/>
-                            <CustomerAddressLabel for="address">Adresse</CustomerAddressLabel>
+                            <CustomerAddressLabel htmlFor="address">Adresse</CustomerAddressLabel>
                             <CustomerAddress type="text" id="address" name="address" onChange={handleCustomerAddressChange} value={customerAddress}/>                        
-                            <CustomerZipCodeLabel for="zipcode">Code postal</CustomerZipCodeLabel>
+                            <CustomerZipCodeLabel htmlFor="zipcode">Code postal</CustomerZipCodeLabel>
                             <CustomerZipCode type="text" id="zipcode" name="zipcode" onChange={handleCustomerZipCodeChange} value={customerZipCode}/>
-                            <CustomerCityLabel for="city">Ville</CustomerCityLabel>
+                            <CustomerCityLabel htmlFor="city">Ville</CustomerCityLabel>
                             <CustomerCity type="text" id="city" name="city" onChange={handleCustomerCityChange} value={customerCity}/>                        
                         </CustomerInfoWrapper>
                         <CustomerCommentsWrapper>
-                        <CustomerCommentsLabel for="comments">Commentaires</CustomerCommentsLabel>
+                        <CustomerCommentsLabel htmlFor="comments">Commentaires</CustomerCommentsLabel>
                         <CustomerComments type="text" wrap="soft" id="comments" name="comments" onChange={handleCustomerCommentsChange} value={customerComments}/>
                         </CustomerCommentsWrapper>
                 </CustomerInfoArea>
