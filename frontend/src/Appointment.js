@@ -3,14 +3,15 @@ import { useState } from "react";
 import styled from "styled-components";
 import moment from "moment";
 
-import plante from "../assets/plante.png"
-import plante2 from "../assets/plante2.png"
+import plante from "./assets/plante.png"
+import plante2 from "./assets/plante2.png"
 
 
 import {AdapterMoment} from "@mui/x-date-pickers/AdapterMoment";
 import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider";
 import {DatePicker} from "@mui/x-date-pickers/DatePicker";
 import TextField from "@mui/material/TextField";
+import { ImSpinner3 } from "react-icons/im";
 
 
 
@@ -18,7 +19,7 @@ import TextField from "@mui/material/TextField";
 
 const Appointment = () => {
 
-    const [status, setStatus] = useState("loading");
+    const [status, setStatus] = useState("idle");
     const [dialog, setDialog] = useState("");
 
     const [selectedDate, setSelectedDate] = useState(new Date());
@@ -26,7 +27,15 @@ const Appointment = () => {
     const [selectedLocation, setSelectedLocation] = useState("Clinic");
     const [selectedTherapist, setSelectedTherapist] = useState("Hélène Blat");
     const [selectedMassageType, setSelectedMassageType] = useState("Suédois");
-    const [selectedDuration, setSelectedDuration] = useState("60");
+    const [selectedDuration, setSelectedDuration] = useState("60");    
+    const [customerLastName, setCustomerLastName] = useState("");
+    const [customerFirstName, setCustomerFirstName] = useState("");
+    const [customerEmail, setCustomerEmail] = useState("");
+    const [customerPhone, setCustomerPhone] = useState("")
+    const [customerAddress, setCustomerAddress] = useState("");
+    const [customerZipCode, setCustomerZipCode] = useState("");
+    const [customerCity, setCustomerCity] = useState("");
+    const [customerComments, setCustomerComments] = useState("");
     
     const appointmentDate = moment(selectedDate).format('MMMM Do YYYY');
 
@@ -35,28 +44,73 @@ const Appointment = () => {
     }
 
     const handleSlotChange = (event) => {
+        event.preventDefault();
         setSelectedSlot(event.target.value);
     }
     
     const handleLocationChange = (event) => {
+        event.preventDefault();
         setSelectedLocation(event.target.value);
     }
     
     const handleTherapistChange = (event) => {
+        event.preventDefault();
         setSelectedTherapist(event.target.value);
     }
 
     const handleMassageTypeChange = (event) => {
+        event.preventDefault();
         setSelectedMassageType(event.target.value);
     }
 
     const handleDurationChange = (event) => {
+        event.preventDefault();
         setSelectedDuration(event.target.value);
     }
 
+    const handleCustomerLastNameChange = (event) => {
+        event.preventDefault();
+        setCustomerLastName(event.target.value);
+    }
     
+    const handleCustomerFirstNameChange = (event) => {
+        event.preventDefault();
+        setCustomerFirstName(event.target.value);
+    }
+
+    const handleCustomerEmailChange = (event) => {
+        event.preventDefault();
+        setCustomerEmail(event.target.value);
+    }
+
+    const handleCustomerPhoneChange = (event) => {
+        event.preventDefault();
+        setCustomerPhone(event.target.value);
+    }
+
+    const handleCustomerAddressChange = (event) => {
+        event.preventDefault();
+        setCustomerAddress(event.target.value);
+    }
+
+    const handleCustomerZipCodeChange = (event) => {
+        event.preventDefault();
+        setCustomerZipCode(event.target.value);
+    }
+
+    const handleCustomerCityChange = (event) => {
+        event.preventDefault();
+        setCustomerCity(event.target.value);
+    }
+
+    const handleCustomerCommentsChange = (event) => {
+        event.preventDefault();
+        setCustomerComments(event.target.value);
+    }
     const submitNewAppointment = () => {
         
+        setStatus("loading");
+
         fetch('/appointments', {
             method: "POST",
             headers: {
@@ -67,11 +121,14 @@ const Appointment = () => {
             body: JSON.stringify({
 
                 date: appointmentDate,
+                customerlastname: customerLastName,
+                customerfirstname: customerFirstName,
                 slot: selectedSlot,
                 location: selectedLocation,
                 therapist: selectedTherapist,
                 massagetype: selectedMassageType,
-                duration: selectedDuration
+                duration: selectedDuration,
+                customercomments: customerComments
             })
             
         })
@@ -175,16 +232,16 @@ const Appointment = () => {
                         <MassageTypeArea>
                         <p style={{fontSize:20,color:"#7e9e6c"}}>Quel type de massage souhaitez-vous?</p>
                                 <MassageTypeWrapper>
-                                    <MassageTypeSelect>
-                                        <MassageTypeOptGroup onChange={handleMassageTypeChange}>
+                                    <MassageTypeSelect onChange={handleMassageTypeChange}>
+                                        <MassageTypeOptGroup >
                                             <Swedish value="swedish">Suédois</Swedish>
                                             <Californian value="californian">Californien</Californian>
                                             <LomiLomi value="lomi-lomi">Lomi-Lomi</LomiLomi>
                                             <Drainage value="drainage">Drainage Lymphatique</Drainage>
                                         </MassageTypeOptGroup>
                                     </MassageTypeSelect>
-                                    <MassageDurationSelect>
-                                        <MassageDurationOptGroup onChange={handleDurationChange}>
+                                    <MassageDurationSelect onChange={handleDurationChange}>
+                                        <MassageDurationOptGroup >
                                             <Sixty value="60">60 min.</Sixty>
                                             <SeventyFive value="75">75 min.</SeventyFive>
                                             <Ninety value="90">90 min.</Ninety>                                        
@@ -198,18 +255,38 @@ const Appointment = () => {
                     <PlantImage src={plante} />
                     <PlantImage2 src={plante2} />
                 </SeparatorArea>
-                <CustomerInfoArea>
-                    <CustomerInfoWrapper>
-                        <CustomerTitleArea>
-                            <CustomerTitle>Parlez-nous de vous</CustomerTitle>
-                        </CustomerTitleArea>
-                    </CustomerInfoWrapper>
+                <CustomerInfoArea>                        
+                        <CustomerTitle>Parlez-nous de vous</CustomerTitle>
+                        <CustomerInfoWrapper>
+                            <CustomerLastNameLabel for="lname">Nom</CustomerLastNameLabel>
+                            <CustomerLastName type="text" id="lname" name="lname" onChange={handleCustomerLastNameChange} value={customerLastName}/>                        
+                            <CustomerFirstNameLabel for="fname">Prénom</CustomerFirstNameLabel>
+                            <CustomerFirstName type="text" id="fname" name="fname" onChange={handleCustomerFirstNameChange} value={customerFirstName}/>                        
+                            <CustomerEmailLabel for="email">Courriel</CustomerEmailLabel>
+                            <CustomerEmail type="email" id="email" name="email" onChange={handleCustomerEmailChange} value={customerEmail}/>                            
+                            <CustomerPhoneLabel for="phone">Téléphone</CustomerPhoneLabel>
+                            <CustomerPhone type="tel" id="phone" name="phone" onChange={handleCustomerPhoneChange} value={customerPhone}/>
+                            <CustomerAddressLabel for="address">Adresse</CustomerAddressLabel>
+                            <CustomerAddress type="text" id="address" name="address" onChange={handleCustomerAddressChange} value={customerAddress}/>                        
+                            <CustomerZipCodeLabel for="zipcode">Code postal</CustomerZipCodeLabel>
+                            <CustomerZipCode type="text" id="zipcode" name="zipcode" onChange={handleCustomerZipCodeChange} value={customerZipCode}/>
+                            <CustomerCityLabel for="city">Ville</CustomerCityLabel>
+                            <CustomerCity type="text" id="city" name="city" onChange={handleCustomerCityChange} value={customerCity}/>                        
+                        </CustomerInfoWrapper>
+                        <CustomerCommentsWrapper>
+                        <CustomerCommentsLabel for="comments">Commentaires</CustomerCommentsLabel>
+                        <CustomerComments type="text" wrap="soft" id="comments" name="comments" onChange={handleCustomerCommentsChange} value={customerComments}/>
+                        </CustomerCommentsWrapper>
                 </CustomerInfoArea>
             </AppointmentArea>
             <Footer>
                 <Dialog>
-                    {status === "error"
-                    ?<ErrorMsg>{dialog}</ErrorMsg>
+                    {status === "loading"
+                    ? <Spinner size={25}/>
+                    :
+                    status === "error"
+                    ?
+                    <ErrorMsg>{dialog}</ErrorMsg>
                     :<ConfirmationMsg>{dialog}</ConfirmationMsg>
                     }
                 </Dialog>
@@ -413,32 +490,76 @@ const PlantImage2 = styled.img`
     height: 200px;   
     
 `
+
 const CustomerInfoArea = styled.div`
-    
     display: grid;
-    grid-template-rows: 15% 85%;   
-    justify-content: center;
+    grid-template-rows: 100px auto;
     align-items: center;
 `
-const CustomerTitleArea = styled.div`
-    
-`
+
 const CustomerTitle = styled.p`
+    text-align: center;
     font-size: 24px;
     color: #7e9e6c;
 `
+
 const CustomerInfoWrapper = styled.div`
+    display: grid;
+    grid-template-columns: 100px auto;
+    gap: 10px;
+    align-items: center;
     
 `
 
-const Footer = styled.div`
-    //height: 30vh;
+const CustomerFirstNameLabel = styled.label``
+const CustomerFirstName = styled.input`
+    height: 30px;
+`
+const CustomerLastNameLabel = styled.label``
+const CustomerLastName = styled.input`
+    height: 30px;
+`
+const CustomerEmailLabel = styled.label``
+const CustomerEmail = styled.input`
+    height: 30px;
+`
+const CustomerPhoneLabel = styled.label``
+const CustomerPhone = styled.input`
+    height: 30px;
+`
+const CustomerAddressLabel = styled.label``
+const CustomerAddress = styled.input`
+    height: 30px;
+`
+const CustomerZipCodeLabel = styled.label``
+const CustomerZipCode = styled.input`
+    height: 30px;
+`
+const CustomerCityLabel = styled.label``
+const CustomerCity = styled.input`
+    height: 30px;
+`
+
+const CustomerCommentsWrapper = styled.div`
+    
+    display: grid;
+    gap: 10px;
+`
+const CustomerCommentsLabel = styled.label``
+const CustomerComments = styled.textarea`
+    
+    height: 100px;
+    resize: none;
+    font-size: 16px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    
+`
+
+const Footer = styled.div`    
     display: flex;
-    flex-direction: column;
-    //justify-content: center;
+    flex-direction: column;    
     align-items: center;
     gap: 30px;
-
 `
 const Dialog = styled.div`
     width: 50vw;
@@ -447,6 +568,22 @@ const Dialog = styled.div`
     justify-content: center;
     align-items: center;
     //border: solid 1px black;
+`
+const Spinner = styled(ImSpinner3)`
+    animation-name: spin;
+    animation-duration: 4000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    color: #7e9e6c;
+
+    @keyframes spin {
+        from {
+            transform:rotate(0deg);
+        }
+        to {
+            transform:rotate(360deg);
+        }
+    }
 `
 const ErrorMsg = styled.p`
     font-size: 20px;
@@ -459,6 +596,7 @@ const ConfirmationMsg = styled.p`
 const BookButton = styled.button`
 
     all: unset;
+    cursor: pointer;
     height: 50px;
     width: 300px;
     background-color: transparent;
