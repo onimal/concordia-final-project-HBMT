@@ -47,66 +47,79 @@ const Appointment = () => {
     const handleSlotChange = (event) => {
         event.preventDefault();
         setSelectedSlot(event.target.value);
+        
     }
     
     const handleLocationChange = (event) => {
         event.preventDefault();
         setSelectedLocation(event.target.value);
+        
     }
     
     const handleTherapistChange = (event) => {
         event.preventDefault();
         setSelectedTherapist(event.target.value);
+        
     }
 
     const handleMassageTypeChange = (event) => {
         event.preventDefault();
         setSelectedMassageType(event.target.value);
+        
     }
 
     const handleDurationChange = (event) => {
         event.preventDefault();
         setSelectedDuration(event.target.value);
+        
     }
 
     const handleCustomerLastNameChange = (event) => {
         event.preventDefault();
         setCustomerLastName(event.target.value);
+        
     }
     
     const handleCustomerFirstNameChange = (event) => {
         event.preventDefault();
         setCustomerFirstName(event.target.value);
+        
     }
 
     const handleCustomerEmailChange = (event) => {
         event.preventDefault();
         setCustomerEmail(event.target.value);
+        
     }
 
     const handleCustomerPhoneChange = (event) => {
         event.preventDefault();
         setCustomerPhone(event.target.value);
+        
     }
 
     const handleCustomerAddressChange = (event) => {
         event.preventDefault();
         setCustomerAddress(event.target.value);
+        
     }
 
     const handleCustomerZipCodeChange = (event) => {
         event.preventDefault();
         setCustomerZipCode(event.target.value);
+        
     }
 
     const handleCustomerCityChange = (event) => {
         event.preventDefault();
         setCustomerCity(event.target.value);
+        
     }
 
     const handleCustomerCommentsChange = (event) => {
         event.preventDefault();
         setCustomerComments(event.target.value);
+        
     }
     const submitNewAppointment = () => {
         
@@ -181,6 +194,20 @@ const Appointment = () => {
             .catch((error) => {
                 setStatus("error");
             })
+        
+            setSelectedSlot("");
+            setSelectedLocation("");
+            setSelectedTherapist("");
+            setSelectedMassageType("");
+            setSelectedDuration("");
+            setCustomerLastName("");
+            setCustomerFirstName("");
+            setCustomerEmail("");
+            setCustomerPhone("");
+            setCustomerAddress("");
+            setCustomerZipCode("");
+            setCustomerCity("");
+            setCustomerComments("");
     }
 
 
