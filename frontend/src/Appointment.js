@@ -12,8 +12,8 @@ import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider";
 import {DatePicker} from "@mui/x-date-pickers/DatePicker";
 import TextField from "@mui/material/TextField";
 import { ImSpinner3 } from "react-icons/im";
-
-
+import { MdErrorOutline } from "react-icons/md"
+import { RiCheckboxCircleLine } from "react-icons/ri"
 
 
 
@@ -39,6 +39,7 @@ const Appointment = () => {
     const [customerComments, setCustomerComments] = useState("");
     
     const appointmentDate = moment(selectedDate).format('MMMM Do YYYY');
+    
 
     const handleDateChange = (date) => {
         setSelectedDate(date._d);
@@ -75,8 +76,9 @@ const Appointment = () => {
     }
 
     const handleCustomerLastNameChange = (event) => {
-        event.preventDefault();
+        event.preventDefault();        
         setCustomerLastName(event.target.value);
+
         
     }
     
@@ -121,93 +123,96 @@ const Appointment = () => {
         setCustomerComments(event.target.value);
         
     }
+
+    
+
+    
+
+
     const submitNewAppointment = () => {
         
-        setStatus("loading");
+        //if (formIsValid) {
+            setStatus("loading");
 
-        fetch('/appointments', {
-            method: "POST",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-                
-            },
-            body: JSON.stringify({
+            fetch('/appointments', {
+                method: "POST",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                    
+                },
+                body: JSON.stringify({
 
-                date: appointmentDate,
-                customerlastname: customerLastName,
-                customerfirstname: customerFirstName,
-                slot: selectedSlot,
-                location: selectedLocation,
-                therapist: selectedTherapist,
-                massagetype: selectedMassageType,
-                duration: selectedDuration,
-                customercomments: customerComments
-            })
-            
-        })
-            .then((res) => res.json())
-            .then((res) => 
-                {
-                    if (res.status === 409){
-                        setStatus("error")
-                        setDialog("Non disponible, veuillez choisir un autre thérapeute, ou un autre horaire.")
-                    } else if(res.status === 201) {
-                        setStatus("success")
-                        setDialog("Votre rendez-vous est confirmé, merci !")
-                    }                
+                    date: appointmentDate,
+                    customerlastname: customerLastName,
+                    customerfirstname: customerFirstName,
+                    slot: selectedSlot,
+                    location: selectedLocation,
+                    therapist: selectedTherapist,
+                    massagetype: selectedMassageType,
+                    duration: selectedDuration,
+                    customercomments: customerComments
                 })
-            .catch((error) => {
-                setStatus("error");
-            })
-        
-        fetch('/customers', {
-            method: "POST",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
                 
-            },
-            body: JSON.stringify({
-
-                lastname: customerLastName,
-                firstname: customerFirstName,
-                email: customerEmail,
-                phone: customerPhone,
-                address: customerAddress,
-                zipcode: customerZipCode,
-                city: customerCity
             })
-            
-        })
-            .then((res) => res.json())
-            .then((res) => 
-                {
-                    if (res.status === 409){
-                        setCustomerCreationStatus("conflict: customer already in database")
-                        
-                    } else if(res.status === 201) {
-                        setCustomerCreationStatus("success: new customer created")
-                        
-                    }                
+                .then((res) => res.json())
+                .then((res) => 
+                    {
+                        if (res.status === 409){
+                            setStatus("error")
+                            setDialog("Non disponible, veuillez choisir un autre thérapeute, ou un autre horaire.")
+                        } else if(res.status === 201) {
+                            setStatus("success")
+                            setDialog("Votre rendez-vous est confirmé, merci !")
+                        }                
+                    })
+                .catch((error) => {
+                    setStatus("error");
                 })
-            .catch((error) => {
-                setStatus("error");
+            
+            fetch('/customers', {
+                method: "POST",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                    
+                },
+                body: JSON.stringify({
+
+                    lastname: customerLastName,
+                    firstname: customerFirstName,
+                    email: customerEmail,
+                    phone: customerPhone,
+                    address: customerAddress,
+                    zipcode: customerZipCode,
+                    city: customerCity
+                })
+                
             })
-        
-            setSelectedSlot("");
-            setSelectedLocation("");
-            setSelectedTherapist("");
-            setSelectedMassageType("");
-            setSelectedDuration("");
-            setCustomerLastName("");
-            setCustomerFirstName("");
-            setCustomerEmail("");
-            setCustomerPhone("");
-            setCustomerAddress("");
-            setCustomerZipCode("");
-            setCustomerCity("");
-            setCustomerComments("");
+                .then((res) => res.json())
+                .then((res) => 
+                    {
+                        if (res.status === 409){
+                            setCustomerCreationStatus("conflict: customer already in database")
+                            
+                        } else if(res.status === 201) {
+                            setCustomerCreationStatus("success: new customer created")
+                            
+                        }                
+                    })
+                .catch((error) => {
+                    setStatus("error");
+                })
+            
+                setCustomerLastName("");
+                setCustomerFirstName("");
+                setCustomerEmail("");
+                setCustomerPhone("");
+                setCustomerAddress("");
+                setCustomerZipCode("");
+                setCustomerCity("");
+                setCustomerComments("");
+        //}
     }
 
 
@@ -320,19 +325,19 @@ const Appointment = () => {
                         <CustomerTitle>Parlez-nous de vous</CustomerTitle>
                         <CustomerInfoWrapper>
                             <CustomerLastNameLabel htmlFor="lname">Nom</CustomerLastNameLabel>
-                            <CustomerLastName type="text" id="lname" name="lname" onChange={handleCustomerLastNameChange} value={customerLastName}/>                        
+                            <CustomerLastName type="text" id="lname" name="lname" onChange={handleCustomerLastNameChange} value={customerLastName} required />                        
                             <CustomerFirstNameLabel htmlFor="fname">Prénom</CustomerFirstNameLabel>
-                            <CustomerFirstName type="text" id="fname" name="fname" onChange={handleCustomerFirstNameChange} value={customerFirstName}/>                        
+                            <CustomerFirstName type="text" id="fname" name="fname" onChange={handleCustomerFirstNameChange} value={customerFirstName} required />                        
                             <CustomerEmailLabel htmlFor="email">Courriel</CustomerEmailLabel>
-                            <CustomerEmail type="email" id="email" name="email" onChange={handleCustomerEmailChange} value={customerEmail}/>                            
+                            <CustomerEmail type="email" id="email" name="email" onChange={handleCustomerEmailChange} value={customerEmail} required />                            
                             <CustomerPhoneLabel htmlFor="phone">Téléphone</CustomerPhoneLabel>
-                            <CustomerPhone type="tel" id="phone" name="phone" onChange={handleCustomerPhoneChange} value={customerPhone}/>
+                            <CustomerPhone type="tel" id="phone" name="phone" onChange={handleCustomerPhoneChange} value={customerPhone} required />
                             <CustomerAddressLabel htmlFor="address">Adresse</CustomerAddressLabel>
-                            <CustomerAddress type="text" id="address" name="address" onChange={handleCustomerAddressChange} value={customerAddress}/>                        
+                            <CustomerAddress type="text" id="address" name="address" onChange={handleCustomerAddressChange} value={customerAddress} required />                        
                             <CustomerZipCodeLabel htmlFor="zipcode">Code postal</CustomerZipCodeLabel>
-                            <CustomerZipCode type="text" id="zipcode" name="zipcode" onChange={handleCustomerZipCodeChange} value={customerZipCode}/>
+                            <CustomerZipCode type="text" id="zipcode" name="zipcode" onChange={handleCustomerZipCodeChange} value={customerZipCode} required />
                             <CustomerCityLabel htmlFor="city">Ville</CustomerCityLabel>
-                            <CustomerCity type="text" id="city" name="city" onChange={handleCustomerCityChange} value={customerCity}/>                        
+                            <CustomerCity type="text" id="city" name="city" onChange={handleCustomerCityChange} value={customerCity} required />                        
                         </CustomerInfoWrapper>
                         <CustomerCommentsWrapper>
                         <CustomerCommentsLabel htmlFor="comments">Commentaires</CustomerCommentsLabel>
@@ -341,18 +346,26 @@ const Appointment = () => {
                 </CustomerInfoArea>
             </AppointmentArea>
             <Footer>
-                <Dialog>
+                <DialogArea>
                     {status === "loading"
                     ? <Spinner size={25}/>
                     :
                     status === "error"
                     ?
-                    <ErrorMsg>{dialog}</ErrorMsg>
-                    :<ConfirmationMsg>{dialog}</ConfirmationMsg>
+                    <DialogWrapper>
+                    <ErrorIcon size={25}/><ErrorMsg>{dialog}</ErrorMsg>
+                    </DialogWrapper>
+                    :
+                    status === "success"
+                    &&
+                    <DialogWrapper>
+                    <SuccessIcon size={25}/><ConfirmationMsg>{dialog}</ConfirmationMsg>
+                    </DialogWrapper>
                     }
-                </Dialog>
+                </DialogArea>
                 <BookButton
                     onClick={submitNewAppointment}
+                    //disabled={formIsValid === false ? true : false}
                 >Réservez votre massage</BookButton>
             </Footer>
             </MainArea>
@@ -382,15 +395,15 @@ const MainArea = styled.div`
 
 const AppointmentArea = styled.div`
 
-    width: 1400px;
+    width: 80vw;
     display: grid;    
-    grid-template-columns: 40% 20% 40%;
+    grid-template-columns: 30% 20% 50%;
     justify-content: center;
 `
 
 const AppointmentWrapper = styled.div`    
     display: grid;
-    grid-template-rows: 15% 85%;    
+    grid-template-rows: 30% 70%;
     justify-content: center;  
 
 `
@@ -554,7 +567,7 @@ const PlantImage2 = styled.img`
 
 const CustomerInfoArea = styled.div`
     display: grid;
-    grid-template-rows: 100px auto;
+    grid-template-rows: 30% 45%;
     align-items: center;
 `
 
@@ -574,41 +587,49 @@ const CustomerInfoWrapper = styled.div`
 
 const CustomerFirstNameLabel = styled.label``
 const CustomerFirstName = styled.input`
+    padding-left: 10px;
     height: 30px;
 `
 const CustomerLastNameLabel = styled.label``
 const CustomerLastName = styled.input`
+    padding-left: 10px;
     height: 30px;
 `
 const CustomerEmailLabel = styled.label``
 const CustomerEmail = styled.input`
+    padding-left: 10px;
     height: 30px;
 `
 const CustomerPhoneLabel = styled.label``
 const CustomerPhone = styled.input`
+    padding-left: 10px;
     height: 30px;
 `
 const CustomerAddressLabel = styled.label``
 const CustomerAddress = styled.input`
+    padding-left: 10px;
     height: 30px;
 `
 const CustomerZipCodeLabel = styled.label``
 const CustomerZipCode = styled.input`
+    padding-left: 10px;
     height: 30px;
 `
 const CustomerCityLabel = styled.label``
 const CustomerCity = styled.input`
+    padding-left: 10px;
     height: 30px;
 `
 
 const CustomerCommentsWrapper = styled.div`
     
     display: grid;
+    margin-top: 30px;
     gap: 10px;
 `
 const CustomerCommentsLabel = styled.label``
 const CustomerComments = styled.textarea`
-    
+    padding-left: 10px;
     height: 100px;
     resize: none;
     font-size: 16px;
@@ -618,17 +639,24 @@ const CustomerComments = styled.textarea`
 
 const Footer = styled.div`    
     display: flex;
-    flex-direction: column;    
+    flex-direction: column;
+    justify-content: flex-end;
     align-items: center;
+    padding-bottom: 100px;
     gap: 30px;
 `
-const Dialog = styled.div`
+const DialogArea = styled.div`
     width: 50vw;
     height: 50px;
-    display: flex;
+    display: flex;  
     justify-content: center;
     align-items: center;
     //border: solid 1px black;
+`
+const DialogWrapper = styled.div `
+    display: flex;
+    gap: 10px;
+    align-items: center;
 `
 const Spinner = styled(ImSpinner3)`
     animation-name: spin;
@@ -650,16 +678,24 @@ const ErrorMsg = styled.p`
     font-size: 20px;
     color: #f54248;
 `
+const ErrorIcon = styled(MdErrorOutline )`
+    color: #f54248;
+`
 const ConfirmationMsg = styled.p`
     font-size: 20px;
     color: #629147;
 `
+const SuccessIcon = styled(RiCheckboxCircleLine )`
+    color: #629147;
+`
+
 const BookButton = styled.button`
 
     all: unset;
     cursor: pointer;
     height: 50px;
     width: 300px;
+    //margin-top: 10px;
     background-color: transparent;
     border: solid 1px #7e9e6c;
     border-radius: 10px;
@@ -667,12 +703,15 @@ const BookButton = styled.button`
     font-size: 20px;
     font-variant-caps: small-caps;
     text-align: center;
-    :hover{
+    :hover:enabled{
         color: whitesmoke;
         background-color: #7e9e6c;
         
     }
-    
+    :disabled{
+        color: gray;
+        border-color: gray;
+    }
 `
 
 export default Appointment;
