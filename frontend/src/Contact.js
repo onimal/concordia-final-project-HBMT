@@ -1,15 +1,58 @@
 import styled from "styled-components";
 
+import React from 'react'
+import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+
+const containerStyle = {
+    width: '400px',
+    height: '400px'
+};
+
+const center = {
+    lat: 45.548280,
+    lng: -73.591830
+};
+
 const Contact = () => {
 
-    return (
-        <Wrapper>
+    const { isLoaded } = useJsApiLoader({
+        id: 'google-map-script',
+        googleMapsApiKey: "AIzaSyBVvhUNEQQw40-dlwNMzOXNcEOb3Q6MsFM"
+        })
+    
+        const [map, setMap] = React.useState(null)
+    
+        const onLoad = React.useCallback(function callback(map) {
+            const bounds = new window.google.maps.LatLngBounds();
+            map.fitBounds(bounds);
+            setMap(map)
+        }, [])
+    
+        const onUnmount = React.useCallback(function callback(map) {
+            setMap(null)
+        }, [])
+    
+        return isLoaded ? (
+            <Wrapper>
             <ContactWrapper>
-                <Placeholder>Contact</Placeholder>
-            </ContactWrapper>
-        </Wrapper>
-    )
-};
+                    <GoogleMap
+                        mapContainerStyle={containerStyle}
+                        center={center}
+                        zoom={18}
+                        onLoad={onLoad}
+                        onUnmount={onUnmount}
+                    >
+                        { /* Child components, such as markers, info windows, etc. */ }
+                        <></>
+                    </GoogleMap>
+                </ContactWrapper>
+            </Wrapper>
+        )
+        : <></>
+}
+
+
+
 
 const Wrapper = styled.div`
 
@@ -32,7 +75,5 @@ const ContactWrapper = styled.div`
     justify-content: center;  
 
 `
-const Placeholder = styled.p`
-    font-size: 32px;
-`
+
 export default Contact;
