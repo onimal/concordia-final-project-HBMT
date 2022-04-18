@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 import React, { useState } from 'react'
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+import { ImSpinner3 } from "react-icons/im";
 
 import plante from "./assets/plante.png"
 import plante2 from "./assets/plante2.png"
@@ -36,31 +37,34 @@ const Contact = () => {
         }, [])
         
         // e-mail functionality built with the help of this source: https://w3collective.com/react-contact-form/
-        
+        const [status, setStatus] = useState("idle");
 
-            const [status, setStatus] = useState("Submit");
-
-            const handleSubmit = async (event) => {
-                event.preventDefault();
-                setStatus("Sending");
-                const {name, subject, message} = event.target.elements;
-                let details = {
-                    name: name.value,
-                    subject: subject.value,
-                    message: message.value
-                };
-                let response = await fetch('/contact', {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json;charset=utf-8",
-                    },
-                    body: JSON.stringify(details),
-                });
-
-                setStatus("Submit");
-                let result = await response.json();
-                alert(result.status);
+        const handleSubmit = async (event) => {
+            event.preventDefault();
+            setStatus("sending");
+            //console.log(status);
+            const {name, email, subject, message} = event.target.elements;
+            let details = {
+                name: name.value,
+                email: email.value,
+                subject: subject.value,
+                message: message.value
             };
+            let response = await fetch('/contact', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json;charset=utf-8",
+                },
+                body: JSON.stringify(details),
+            });
+
+            setStatus("Submit");
+            let result = await response.json();
+            //alert(result.status);
+            setStatus(result.status)
+            //console.log(status);
+            event.target.reset();
+        };
         
 
 
@@ -70,16 +74,18 @@ const Contact = () => {
             <ContactWrapper>
                 <ContactArea>
                     <ContactInfo>
-                        <TherapistInfo01>
-                            <Therapist01Name>Hélène Blat</Therapist01Name>
-                            <Therapist01Phone>(514) 557-1234</Therapist01Phone>
-                            <Therapist01Email>helene.blat@masso.com</Therapist01Email>
-                        </TherapistInfo01>
-                        <TherapistInfo02>
-                            <Therapist02Name>Katia Breton</Therapist02Name>
-                            <Therapist02Phone>(514) 557-4321</Therapist02Phone>
-                            <Therapist02Email>katia.breton@masso.com</Therapist02Email>
-                        </TherapistInfo02>
+                        <TherapistsInfo>
+                            <TherapistInfo01>
+                                <Therapist01Name>Hélène Blat</Therapist01Name>
+                                <Therapist01Phone>(514) 557-1234</Therapist01Phone>
+                                <Therapist01Email>helene.blat@masso.com</Therapist01Email>
+                            </TherapistInfo01>
+                            <TherapistInfo02>
+                                <Therapist02Name>Katia Breton</Therapist02Name>
+                                <Therapist02Phone>(514) 557-4321</Therapist02Phone>
+                                <Therapist02Email>katia.breton@masso.com</Therapist02Email>
+                            </TherapistInfo02>
+                        </TherapistsInfo>
                         <CenterInfo>
                             <CenterInfoWrapper>
                                 <CenterName>Centre de Massothérapie Un Pas Vers Soi</CenterName>
@@ -116,13 +122,20 @@ const Contact = () => {
                                 <SubjectLabel htmlFor="subject">Objet</SubjectLabel>
                                 <Subject type="text" id="subject" name="subject" required />
                             </SubjectWrapper>
-                            <BodyWrapper>
-                                <BodyLabel htmlFor="body">Message</BodyLabel>
-                                <Body type="text" wrap="soft" id="body" name="body" required />
-                            </BodyWrapper>
-                            <ButtonWrapper>
+                            <MessageWrapper>
+                                <MessageLabel htmlFor="message">Message</MessageLabel>
+                                <Message type="text" wrap="soft" id="message" name="message" required />
+                            </MessageWrapper>
+                            <FooterWrapper>
                                 <SendButton>Envoyer</SendButton>
-                            </ButtonWrapper>
+                                    {status === "error"
+                                    ? <ErroMsg>Erreur !</ErroMsg>
+                                    : status === "message sent" 
+                                    ? <Dialog>Message envoyé !</Dialog>
+                                    : status === "sending" 
+                                    && <Spinner size={25}/>
+                                    }
+                            </FooterWrapper>
                     </EmailFormWrapper>
                 </form>
                 </EmailFormArea>
@@ -151,7 +164,7 @@ const ContactWrapper = styled.div`
     justify-content: center;  
 `
 const ContactArea = styled.div`
-    height: 80vh;
+    height: 85vh;
     display: flex;
     flex-direction: column;   
     justify-content: center;
@@ -165,59 +178,66 @@ const ContactInfo = styled.div`
     gap: 20px;
     align-self: center;    
 `
+const TherapistsInfo = styled.div`
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+`
 const TherapistInfo01 = styled.div`
+    width: 15vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 10px;
-    border-radius: 10px;    
+    border-radius: 5px;    
     border:solid 1px #7e9e6c;
 `
 const Therapist01Name = styled.p`
     color: #7e9e6c;
-    font-size: 24px;
+    font-size: 20px;
     font-variant-caps: small-caps;
 `
 const Therapist01Phone = styled.p`
     color: #7e9e6c;
-    font-size: 18px;
+    font-size: 16px;
 `
 
 const Therapist01Email = styled.p`
     color: #7e9e6c;
-    font-size: 18px;
+    font-size: 16px;
 `
 
 const TherapistInfo02 = styled.div`
+    width: 15vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 10px;
-    border-radius: 10px;    
+    border-radius: 5px;    
     border: solid 1px #7e9e6c;
 `
 const Therapist02Name = styled.p`
     color: #7e9e6c;
-    font-size: 24px;
+    font-size: 20px;
     font-variant-caps: small-caps;
 `
 const Therapist02Phone = styled.p`
     color: #7e9e6c;
-    font-size: 18px;
+    font-size: 16px;
 `
 
 const Therapist02Email = styled.p`
     color: #7e9e6c;
-    font-size: 18px;
+    font-size: 16px;
 `
 
 const CenterInfo = styled.div`
     height: 45vh;
     display: grid;
     grid-template-rows: 30% 70%;
-    border-radius: 10px;
+    border-radius: 5px;
     border: solid 1px #7e9e6c;
     
 `
@@ -230,18 +250,18 @@ const CenterInfoWrapper = styled.div`
 `
 const CenterName = styled.p`
     color: #7e9e6c;
-    font-size: 24px;
+    font-size: 20px;
     font-variant-caps: small-caps;
     
 `
 const CenterAddress = styled.p`
     color: #7e9e6c;
-    font-size: 18px;
+    font-size: 16px;
 `
 
 const CenterPhone = styled.p`
     color: #7e9e6c;
-    font-size: 18px;
+    font-size: 16px;
 `
 
 const GoogleMapWrapper = styled.div`
@@ -254,8 +274,7 @@ const SeparatorArea = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    //gap: 50px;
+    margin-left: 20px;
 `
 const PlantImage = styled.img`    
     width: 90px;
@@ -277,16 +296,17 @@ const EmailFormArea = styled.div`
 `
 const EmailFormWrapper = styled.div`
     
-    width: 40vw;
-    height: 70vh;    
+    width: 45vw;
+    height: 60vh;    
     align-self: center; 
     
 `
 const SenderWrapper = styled.div`
     
     display: flex;
-    flex-direction: column;
-    padding: 20px;
+    flex-direction: column;    
+    padding-left: 20px;
+    padding-right: 20px;
     border-color: #7e9e6c;
     border-radius: 10px;
     gap: 10px;
@@ -298,8 +318,8 @@ const SenderNameLabel = styled.label`
 `
 const SenderName = styled.input`
     all: unset;
-    height: 50px;
-    border-radius: 10px;
+    height: 30px;
+    border-radius: 5px;
     border: solid 1px #7e9e6c;
     color: gray;
     padding-left: 10px;
@@ -311,8 +331,8 @@ const SenderEmailLabel = styled.label`
 `
 const SenderEmail = styled.input`
     all: unset;
-    height: 50px;
-    border-radius: 10px;
+    height: 30px;
+    border-radius: 5px;
     border: solid 1px #7e9e6c;
     color: gray;
     padding-left: 10px;
@@ -321,7 +341,9 @@ const SenderEmail = styled.input`
 const SubjectWrapper = styled.div`
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
     border-color: #7e9e6c;
     border-radius: 10px;
     
@@ -334,39 +356,42 @@ const SubjectLabel = styled.label`
 `
 const Subject = styled.input`
     all: unset;
-    height: 50px;
-    border-radius: 10px;
+    height: 30px;
+    border-radius: 5px;
     border: solid 1px #7e9e6c;
     color: gray;
     padding-left: 10px;
     padding-right: 10px;
 `
-const BodyWrapper = styled.div`
+const MessageWrapper = styled.div`
     display: flex;
     flex-direction: column;
     padding: 20px;
     border-color: #7e9e6c;
     border-radius: 10px;
 `
-const BodyLabel = styled.label`
+const MessageLabel = styled.label`
     margin-bottom: 10px;
     font-size: 18px;
     color: #7e9e6c;
 `
-const Body = styled.textarea`
+const Message = styled.textarea`
     all: unset;
     resize: none;
     height: 20vh;
-    border-radius: 10px;
+    border-radius: 5px;
     border: solid 1px #7e9e6c;
     color: gray;
     padding: 25px;
 `
-const ButtonWrapper = styled.div`
+const FooterWrapper = styled.div`
     display: flex;
-    justify-content: flex-end;
-    height: 100px;
+    justify-content: flex-start;
+    gap: 20px;
+    align-items: center;
+    //height: 100px;
     padding-right: 20px;
+    padding-left: 20px;
 `
 const SendButton = styled.button`
 
@@ -387,5 +412,28 @@ const SendButton = styled.button`
     }
     
 `
+const ErroMsg = styled.p`
+    font-size: 20px;
+    color: #f54248;
+`
 
+const Dialog = styled.p`
+    font-size: 20px;
+`
+const Spinner = styled(ImSpinner3)`
+    animation-name: spin;
+    animation-duration: 4000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    color: #7e9e6c;
+
+    @keyframes spin {
+        from {
+            transform:rotate(0deg);
+        }
+        to {
+            transform:rotate(360deg);
+        }
+    }
+`
 export default Contact;
