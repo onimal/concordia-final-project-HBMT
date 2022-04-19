@@ -24,17 +24,17 @@ const Contact = () => {
         googleMapsApiKey: "AIzaSyBVKfjw0XtqPZGZ1cFLvnEmUW1Wup_vQvk"
         })
     
-        const [map, setMap] = React.useState(null)
+        //const [map, setMap] = React.useState(null)
     
-        const onLoad = React.useCallback(function callback(map) {
-            const bounds = new window.google.maps.LatLngBounds();
-            map.fitBounds(bounds);
-            setMap(map)
-        }, [])
+        //const onLoad = React.useCallback(function callback(map) {
+            //const bounds = new window.google.maps.LatLngBounds();
+            //map.fitBounds(bounds);
+            //setMap(map)
+        //}, [])
     
-        const onUnmount = React.useCallback(function callback(map) {
-            setMap(null)
-        }, [])
+        //const onUnmount = React.useCallback(function callback(map) {
+        //    setMap(null)
+        //}, [])
         
         // e-mail functionality built with the help of this source: https://w3collective.com/react-contact-form/
         const [status, setStatus] = useState("idle");
@@ -97,8 +97,8 @@ const Contact = () => {
                             mapContainerStyle={containerStyle}
                             center={center}
                             zoom={18}
-                            onLoad={onLoad}
-                            onUnmount={onUnmount}
+                            //onLoad={onLoad}
+                            //onUnmount={onUnmount}
                             >{}<></>
                             </GoogleMap>
                         </GoogleMapWrapper>
@@ -191,7 +191,7 @@ const TherapistInfo01 = styled.div`
     align-items: center;
     gap: 10px;
     border-radius: 5px;    
-    border:solid 1px #7e9e6c;
+    border:solid 1px gray;
 `
 const Therapist01Name = styled.p`
     color: #7e9e6c;
@@ -216,7 +216,7 @@ const TherapistInfo02 = styled.div`
     align-items: center;
     gap: 10px;
     border-radius: 5px;    
-    border: solid 1px #7e9e6c;
+    border: solid 1px gray;
 `
 const Therapist02Name = styled.p`
     color: #7e9e6c;
@@ -238,7 +238,7 @@ const CenterInfo = styled.div`
     display: grid;
     grid-template-rows: 30% 70%;
     border-radius: 5px;
-    border: solid 1px #7e9e6c;
+    border: solid 1px gray;
     
 `
 const CenterInfoWrapper = styled.div`
@@ -313,27 +313,27 @@ const SenderWrapper = styled.div`
     
 `
 const SenderNameLabel = styled.label`
-    font-size: 18px;
+    font-size: 16px;
     color: #7e9e6c;
 `
 const SenderName = styled.input`
     all: unset;
     height: 30px;
-    border-radius: 5px;
-    border: solid 1px #7e9e6c;
+    //border-radius: 5px;
+    border: solid 1px gray;
     color: gray;
     padding-left: 10px;
     padding-right: 10px;
 `
 const SenderEmailLabel = styled.label`
-    font-size: 18px;
+    font-size: 16px;
     color: #7e9e6c;
 `
 const SenderEmail = styled.input`
     all: unset;
     height: 30px;
-    border-radius: 5px;
-    border: solid 1px #7e9e6c;
+    //border-radius: 5px;
+    border: solid 1px gray;
     color: gray;
     padding-left: 10px;
     padding-right: 10px;
@@ -351,14 +351,14 @@ const SubjectWrapper = styled.div`
 
 const SubjectLabel = styled.label`
     margin-bottom: 10px;
-    font-size: 18px;
+    font-size: 16px;
     color: #7e9e6c;
 `
 const Subject = styled.input`
     all: unset;
     height: 30px;
-    border-radius: 5px;
-    border: solid 1px #7e9e6c;
+    //border-radius: 5px;
+    border: solid 1px gray;
     color: gray;
     padding-left: 10px;
     padding-right: 10px;
@@ -372,17 +372,17 @@ const MessageWrapper = styled.div`
 `
 const MessageLabel = styled.label`
     margin-bottom: 10px;
-    font-size: 18px;
+    font-size: 16px;
     color: #7e9e6c;
 `
 const Message = styled.textarea`
     all: unset;
     resize: none;
     height: 20vh;
-    border-radius: 5px;
-    border: solid 1px #7e9e6c;
+    //border-radius: 5px;
+    border: solid 1px gray;
     color: gray;
-    padding: 25px;
+    padding: 20px;
 `
 const FooterWrapper = styled.div`
     display: flex;
