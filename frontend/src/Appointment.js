@@ -46,82 +46,54 @@ const Appointment = () => {
     }
 
     const handleSlotChange = (event) => {
-        event.preventDefault();
-        setSelectedSlot(event.target.value);
-        
-    }
+        setSelectedSlot(event.target.value);}
     
     const handleLocationChange = (event) => {
-        event.preventDefault();
         setSelectedLocation(event.target.value);
-        
     }
     
-    const handleTherapistChange = (event) => {
-        event.preventDefault();
+    const handleTherapistChange = (event) => {        
         setSelectedTherapist(event.target.value);
-        
     }
 
     const handleMassageTypeChange = (event) => {
-        event.preventDefault();
         setSelectedMassageType(event.target.value);
-        
     }
 
     const handleDurationChange = (event) => {
-        event.preventDefault();
         setSelectedDuration(event.target.value);
-        
     }
 
     const handleCustomerLastNameChange = (event) => {
-        event.preventDefault();        
-        setCustomerLastName(event.target.value);
-
-        
+        setCustomerLastName(event.target.value);        
     }
     
-    const handleCustomerFirstNameChange = (event) => {
-        event.preventDefault();
-        setCustomerFirstName(event.target.value);
-        
+    const handleCustomerFirstNameChange = (event) => {        
+        setCustomerFirstName(event.target.value);        
     }
 
-    const handleCustomerEmailChange = (event) => {
-        event.preventDefault();
-        setCustomerEmail(event.target.value);
-        
+    const handleCustomerEmailChange = (event) => {        
+        setCustomerEmail(event.target.value);        
     }
 
-    const handleCustomerPhoneChange = (event) => {
-        event.preventDefault();
-        setCustomerPhone(event.target.value);
-        
+    const handleCustomerPhoneChange = (event) => {        
+        setCustomerPhone(event.target.value);        
     }
 
     const handleCustomerAddressChange = (event) => {
-        event.preventDefault();
-        setCustomerAddress(event.target.value);
-        
+        setCustomerAddress(event.target.value);        
     }
 
     const handleCustomerZipCodeChange = (event) => {
-        event.preventDefault();
         setCustomerZipCode(event.target.value);
-        
     }
 
-    const handleCustomerCityChange = (event) => {
-        event.preventDefault();
-        setCustomerCity(event.target.value);
-        
+    const handleCustomerCityChange = (event) => {        
+        setCustomerCity(event.target.value);        
     }
 
-    const handleCustomerCommentsChange = (event) => {
-        event.preventDefault();
-        setCustomerComments(event.target.value);
-        
+    const handleCustomerCommentsChange = (event) => {        
+        setCustomerComments(event.target.value);        
     }
 
     
@@ -629,12 +601,12 @@ const CustomerCommentsWrapper = styled.div`
 `
 const CustomerCommentsLabel = styled.label``
 const CustomerComments = styled.textarea`
-    padding-left: 10px;
+    padding: 10px;
     height: 100px;
     resize: none;
     font-size: 16px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    
+    color: gray;
 `
 
 const Footer = styled.div`    

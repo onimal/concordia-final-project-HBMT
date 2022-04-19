@@ -5,7 +5,9 @@ const Bio = () => {
     return (
         <Wrapper>
             <BioWrapper>
-                <Placeholder>Bio</Placeholder>
+                <BioArea>
+
+                </BioArea>
             </BioWrapper>
         </Wrapper>
     )
@@ -32,7 +34,12 @@ const BioWrapper = styled.div`
     justify-content: center;  
 
 `
-const Placeholder = styled.p`
-    font-size: 32px;
+const BioArea = styled.div`
+    
+    height: 20vh;
+    display: flex;
+    flex-direction: column;
+    border: solid 1px black;
+
 `
 export default Bio;
