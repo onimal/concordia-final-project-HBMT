@@ -14,13 +14,14 @@ import TextField from "@mui/material/TextField";
 import { ImSpinner3 } from "react-icons/im";
 import { MdErrorOutline } from "react-icons/md"
 import { RiCheckboxCircleLine } from "react-icons/ri"
+import { padding } from "@mui/system";
 
 
 
 const Appointment = () => {
 
     const [status, setStatus] = useState("idle");
-    const [customerCreationStatus, setCustomerCreationStatus] = useState("")
+    const [customerCreationStatus, setCustomerCreationStatus] = useState("");
     const [dialog, setDialog] = useState("");
 
     const [selectedDate, setSelectedDate] = useState(new Date());
@@ -44,67 +45,80 @@ const Appointment = () => {
     const handleDateChange = (date) => {
         setSelectedDate(date._d);
     }
+    console.log(selectedDate);
 
     const handleSlotChange = (event) => {
-        event.preventDefault();
-        setSelectedSlot(event.target.value);
+        setSelectedSlot(event.target.value);        
     }
-    
+    console.log(selectedSlot);
+
     const handleLocationChange = (event) => {
         setSelectedLocation(event.target.value);
     }
-    
+    console.log(selectedLocation);
+
     const handleTherapistChange = (event) => {        
-        setSelectedTherapist(event.target.value);
+        setSelectedTherapist(event.target.value);        
     }
+    console.log(selectedTherapist);
 
     const handleMassageTypeChange = (event) => {
-        setSelectedMassageType(event.target.value);
+        setSelectedMassageType(event.target.value);        
     }
+    console.log(selectedMassageType);
 
     const handleDurationChange = (event) => {
-        setSelectedDuration(event.target.value);
+        setSelectedDuration(event.target.value);        
     }
+    console.log(selectedDuration);
 
     const handleCustomerLastNameChange = (event) => {
         setCustomerLastName(event.target.value);        
     }
-    
+    console.log(customerLastName);
+
     const handleCustomerFirstNameChange = (event) => {        
-        setCustomerFirstName(event.target.value);        
+        setCustomerFirstName(event.target.value);                
     }
+    console.log(customerFirstName);
 
     const handleCustomerEmailChange = (event) => {        
         setCustomerEmail(event.target.value);        
     }
+    console.log(customerEmail);
 
     const handleCustomerPhoneChange = (event) => {        
         setCustomerPhone(event.target.value);        
     }
+    console.log(customerPhone);
 
     const handleCustomerAddressChange = (event) => {
-        setCustomerAddress(event.target.value);        
+        setCustomerAddress(event.target.value);          
     }
+    console.log(customerAddress);
 
     const handleCustomerZipCodeChange = (event) => {
-        setCustomerZipCode(event.target.value);
+        setCustomerZipCode(event.target.value);        
     }
+    console.log(customerZipCode);
 
     const handleCustomerCityChange = (event) => {        
-        setCustomerCity(event.target.value);        
+        setCustomerCity(event.target.value);                
     }
+    console.log(customerCity);
 
     const handleCustomerCommentsChange = (event) => {        
-        setCustomerComments(event.target.value);        
+        setCustomerComments(event.target.value);              
     }
+    console.log(customerComments);
 
     
 
     
 
 
-    const submitNewAppointment = (event) => {
-        event.preventDefault();
+    const submitNewAppointment = () => {
+        
         //if (formIsValid) {
             setStatus("loading");
 
@@ -186,23 +200,21 @@ const Appointment = () => {
                 setCustomerZipCode("");
                 setCustomerCity("");
                 setCustomerComments("");
-        }
-    
+        //}
+    }
 
 
     return (
         <Wrapper>
-            <form onSubmit={submitNewAppointment}>
             <MainArea>
             <AppointmentArea>
-                
                 <AppointmentWrapper>
                     <AppointmentTitleArea>
                         <AppointmentTitle>Personnalisez votre moment de détente</AppointmentTitle>
                     </AppointmentTitleArea>
                     <SelectionArea>
                         <DateTimeArea>
-                            <LocalizationProvider dateAdapter={AdapterMoment} required>
+                            <LocalizationProvider dateAdapter={AdapterMoment}>
                                 <DatePicker
                                     label="Sélectionner la date et l'heure"                                
                                     value={selectedDate}
@@ -211,9 +223,8 @@ const Appointment = () => {
                                     showTodayButton={true}                                
                                     renderInput={(props) => <TextField {...props} />}
                                 />
-                                <TimePickerSelect value={selectedSlot} onChange={handleSlotChange}>
+                                <TimePickerSelect onChange={handleSlotChange}>
                                     <TimePickerOptGroup >
-                                        <option value="" required>Pick a time</option >
                                         <TimePickerSlot01 value="100">10h - 11h</TimePickerSlot01>
                                         <TimePickerSlot02 value="200">11h - 12h</TimePickerSlot02>
                                         <TimePickerSlot03 value="300">12h - 13h</TimePickerSlot03>
@@ -237,7 +248,6 @@ const Appointment = () => {
                                         name="Location"                            
                                         value="Clinic"
                                         defaultChecked
-                                        required
                                     />
                                     Au centre "Un pas vers Soi"
                                     </label>
@@ -246,7 +256,6 @@ const Appointment = () => {
                                         type="radio"
                                         name="Location"                            
                                         value="Home"
-                                        required
                                     />
                                     À votre domicile
                                     </label>
@@ -261,7 +270,6 @@ const Appointment = () => {
                                         name="Therapist"                            
                                         value="Hélène Blat"
                                         defaultChecked
-                                        required
                                     />
                                     Hélène Blat
                                     </label>
@@ -270,34 +278,32 @@ const Appointment = () => {
                                         type="radio"
                                         name="Therapist"                            
                                         value="Katia Breton"
-                                        required
                                     />
                                     Katia Breton
                                     </label>
                                 </TherapistWrapper>
                         </TherapistArea>
                         <MassageTypeArea>
-                        {/* <p style={{fontSize:20,color:"#7e9e6c"}}>Quel type de massage souhaitez-vous?</p> */}
-                                {/* <MassageTypeWrapper> */}
-                                    <MassageTypeSelect onChange={handleMassageTypeChange}>
-                                        <MassageTypeOptGroup >
-                                            <option value="" required>Pick a massage type</option >
+                                <MassageTypeLabel htmlFor="massagetype">massage type
+                                    <MassageTypeSelect onChange={handleMassageTypeChange}>                                    
+                                        <MassageTypeOptGroup name="massagetype">
+                                            <MassageTypeHelperText></MassageTypeHelperText>
                                             <Swedish value="swedish">Suédois</Swedish>
                                             <Californian value="californian">Californien</Californian>
                                             <LomiLomi value="lomi-lomi">Lomi-Lomi</LomiLomi>
                                             <Drainage value="drainage">Drainage Lymphatique</Drainage>
                                         </MassageTypeOptGroup>
                                     </MassageTypeSelect>
-                                    {/* <MassageDurationSelect onChange={handleDurationChange}> */}
-                                    <select onChange={handleDurationChange}>
-                                        <MassageDurationOptGroup >
-                                            <option value="" required>Pick a duration</option >
+                                </MassageTypeLabel>
+                                    <label htmlFor="duration">
+                                    <MassageDurationSelect onChange={handleDurationChange}>
+                                        <MassageDurationOptGroup>
                                             <Sixty value="60">60 min.</Sixty>
                                             <SeventyFive value="75">75 min.</SeventyFive>
                                             <Ninety value="90">90 min.</Ninety>                                        
-                                        </MassageDurationOptGroup>
-                                    </select>
-                                {/* </MassageTypeWrapper> */}
+                                        </MassageDurationOptGroup>                                        
+                                    </MassageDurationSelect>
+                                    </label>                                
                         </MassageTypeArea>                    
                     </SelectionArea>
                 </AppointmentWrapper>
@@ -305,12 +311,9 @@ const Appointment = () => {
                     <PlantImage src={plante} />
                     <PlantImage2 src={plante2} />
                 </SeparatorArea>
-                
                 <CustomerInfoArea>                        
                         <CustomerTitle>Parlez-nous de vous</CustomerTitle>
-                        
                         <CustomerInfoWrapper>
-                           
                             <CustomerLastNameLabel htmlFor="lname">Nom</CustomerLastNameLabel>
                             <CustomerLastName type="text" id="lname" name="lname" onChange={handleCustomerLastNameChange} value={customerLastName} required />                        
                             <CustomerFirstNameLabel htmlFor="fname">Prénom</CustomerFirstNameLabel>
@@ -331,7 +334,6 @@ const Appointment = () => {
                         <CustomerComments type="text" wrap="soft" id="comments" name="comments" onChange={handleCustomerCommentsChange} value={customerComments}/>
                         </CustomerCommentsWrapper>
                 </CustomerInfoArea>
-            
             </AppointmentArea>
             <Footer>
                 <DialogArea>
@@ -352,12 +354,11 @@ const Appointment = () => {
                     }
                 </DialogArea>
                 <BookButton
-                    
+                    onClick={submitNewAppointment}
                     //disabled={formIsValid === false ? true : false}
                 >Réservez votre massage</BookButton>
             </Footer>
             </MainArea>
-        </form>
         </Wrapper>
     )
 
@@ -421,21 +422,18 @@ const TimePickerOptGroup = styled.optgroup`
 `
 
 const TimePickerSelect = styled.select`
+    cursor: pointer;
     border-radius: 3px;
     background: transparent;
     border: solid 1px darkgray;
     text-align-last: center;
-    &:hover{
+    :hover{
         border-color: black;
     }
-    &:focus{
+    :focus{
         border-color: black;
     }
 `
-
-// const TimePickerSlot = styled.option``
-
-
 const TimePickerSlot01 = styled.option``
 const TimePickerSlot02 = styled.option``
 const TimePickerSlot03 = styled.option``
@@ -485,35 +483,43 @@ const SecondTherapist = styled.input`
 const MassageTypeArea = styled.div`
 
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    
+    align-items: flex-end;
     gap: 20px;
 `
-const MassageTypeWrapper = styled.div`
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
+const MassageTypeLabel = styled.label`
+    //display: flex;
+    //flex-direction: column;
+    //gap: 20px;
+    //text-align: center;
+    //font-size: 20px;
 `
 const MassageTypeSelect = styled.select`
     
+    cursor: pointer;
     height: 50px;
-    width: 260px;
+    //width: 260px;
     font-size: 16px;
     border-radius: 3px;
     background: transparent;
     border: solid 1px darkgray;
     text-align-last: center;
-    &:hover{
+    :hover{
         border-color: black;
     }
-    &:focus{
+    :focus{
         border-color: black;
     }
 `
 const MassageTypeOptGroup = styled.optgroup`    
 `
-const Swedish = styled.option``
-const Californian = styled.option``
+const Swedish = styled.option`
+    
+`
+const Californian = styled.option`
+    
+`
 const LomiLomi = styled.option``
 const Drainage = styled.option``
 
@@ -526,10 +532,10 @@ const MassageDurationSelect = styled.select`
     background: transparent;
     border: solid 1px darkgray;
     text-align-last: center;
-    &:hover{
+    :hover{
         border-color: black;
     }
-    &:focus{
+    :focus{
         border-color: black;
     }
 `
@@ -635,7 +641,7 @@ const Footer = styled.div`
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
-    //padding-bottom: 100px;
+    padding-bottom: 100px;
     gap: 30px;
 `
 const DialogArea = styled.div`

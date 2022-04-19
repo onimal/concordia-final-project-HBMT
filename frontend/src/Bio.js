@@ -9,18 +9,18 @@ const Bio = () => {
 
     return (
         <Wrapper>
-            <BioWrapper>
+            <Main>
                 <BioArea>
-                    <Bio01Wrapper>
-                        <Bio01ImageWrapper>
-                            <Bio01Image src={helene_img}/>
-                        </Bio01ImageWrapper>
-                        <Bio01Separator>
-                            <Bio01SeparatorImage src={plante}/>
-                        </Bio01Separator>
-                        <Bio01TextWrapper>
-                            <Bio01Name>Hélène Blat</Bio01Name>
-                            <Bio01Text>
+                    <BioWrapper>
+                        <BioImageWrapper>
+                            <BioImage src={helene_img}/>
+                        </BioImageWrapper>
+                        <BioSeparator>
+                            <BioSeparatorImage src={plante}/>
+                        </BioSeparator>
+                        <BioTextWrapper>
+                            <BioName>Hélène Blat</BioName>
+                            <BioText>
                             Passionnée depuis son plus jeune âge par les massages,<br></br>
                             Hélène a choisi de se professionnaliser en se formant à l’école Fleur de Peau.<br></br><br></br> 
                             La diversité de ses techniques telles que le Suédois, le Californien, l’Oriental, le Lomi-Lomi 
@@ -32,20 +32,20 @@ const Bio = () => {
                             Elle utilise ses mains comme des instruments pour faire circuler les énergies 
                             et ainsi amener à l’harmonisation de l’être dans son ensemble.<br></br><br></br>
                             Membre du RMPQ
-                            </Bio01Text>
-                        </Bio01TextWrapper>
-                    </Bio01Wrapper>
+                            </BioText>
+                        </BioTextWrapper>
+                    </BioWrapper>
                     
-                    <Bio02Wrapper>
-                        <Bio02ImageWrapper>
-                            <Bio02Image src={katia_img}/>
-                        </Bio02ImageWrapper>
-                        <Bio02Separator>
-                            <Bio02SeparatorImage src={plante2}/>
-                        </Bio02Separator>
-                        <Bio02TextWrapper>
-                            <Bio02Name>Katia Breton</Bio02Name>
-                            <Bio02Text>
+                    <BioWrapper>
+                        <BioImageWrapper>
+                            <BioImage src={katia_img}/>
+                        </BioImageWrapper>
+                        <BioSeparator>
+                            <BioSeparatorImage src={plante2}/>
+                        </BioSeparator>
+                        <BioTextWrapper>
+                            <BioName>Katia Breton</BioName>
+                            <BioText>
                             Katia Breton est massothérapeute agréée certifiée, ainsi que réflexologue.<br></br><br></br>
                             Ses techniques sont le suédois, la fasciathérapie, la réflexologie,<br></br>
                             la thérapie crânienne et le massage pour personnes âgées.<br></br><br></br>
@@ -54,24 +54,23 @@ const Bio = () => {
                             L’écoute ainsi que l’intention dans ses mains lui permettent d’accompagner la personne vers un meilleur équilibre et bien-être.<br></br><br></br>
                             Elle travaille en respectant chaque personne dans sa globalité.<br></br><br></br>
                             Membre de la FQM
-                            </Bio02Text>
-                        </Bio02TextWrapper>
-                    </Bio02Wrapper>                    
+                            </BioText>
+                        </BioTextWrapper>
+                    </BioWrapper>                    
                 </BioArea>
-            </BioWrapper>
+            </Main>
         </Wrapper>
     )
 };
 
 const Wrapper = styled.div`
-
     width: 100vw;
     min-width: 640px;
     display: flex;
     justify-content: center;
 `
 
-const BioWrapper = styled.div`
+const Main = styled.div`
     height: 85vh;
     width: 98vw;
     margin-top: 0px;
@@ -85,16 +84,16 @@ const BioArea = styled.div`
     grid-template-columns: 50% 50%;    
 `
 
-const Bio01Wrapper = styled.div`    
+const BioWrapper = styled.div`    
     background-color: #7e9e6c;
     height: 75vh;
-    width: 35vw;
+    width: 40vw;
     justify-self: center;
     align-self: center;
     display: grid;
     grid-template-rows: 40% 15% 40%;
 `
-const Bio01ImageWrapper = styled.div`    
+const BioImageWrapper = styled.div`    
     height: 100%;
     width: 100%;
     justify-self: center;
@@ -103,12 +102,12 @@ const Bio01ImageWrapper = styled.div`
     justify-content: center;
     align-items: center;
 `
-const Bio01Image = styled.img`
-    width: 50%;
+const BioImage = styled.img`
+    width: 40%;
     border-radius: 5px;    
 `
 
-const Bio01Separator = styled.div`    
+const BioSeparator = styled.div`    
     height: 100%;
     width: 100%;
     justify-self: center;
@@ -116,78 +115,24 @@ const Bio01Separator = styled.div`
     display: flex;
     justify-content: center;
 `
-const Bio01SeparatorImage = styled.img`
-    width: 30%;
+const BioSeparatorImage = styled.img`
+    width: 20%;
 `
-const Bio01TextWrapper = styled.div`    
+const BioTextWrapper = styled.div`    
     height: 100%;
     width: 90%;
     justify-self: center;
     align-self: center;
 `
 
-const Bio01Name = styled.p`
+const BioName = styled.p`
     font-size: 24px;
     color: white;
     font-variant-caps: small-caps;
     padding-bottom: 10px;
     text-align: center;
 `
-const Bio01Text = styled.p`
-    font-size: 16px;
-    color: white;    
-`
-
-const Bio02Wrapper = styled.div`    
-    background-color: #7e9e6c;
-    height: 75vh;
-    width: 35vw;
-    justify-self: center;
-    align-self: center;
-    display: grid;
-    grid-template-rows: 40% 15% 40%;   
-`
-
-const Bio02ImageWrapper = styled.div`    
-    height: 100%;
-    width: 100%;
-    justify-self: center;
-    align-self: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`
-const Bio02Image = styled.img`
-    width: 50%;
-    border-radius: 5px;    
-`
-
-const Bio02Separator = styled.div`    
-    height: 100%;
-    width: 100%;
-    justify-self: center;
-    align-self: center;
-    display: flex;
-    justify-content: center;
-`
-const Bio02SeparatorImage = styled.img`
-    width: 30%;
-`
-const Bio02TextWrapper = styled.div`    
-    height: 100%;
-    width: 90%;
-    justify-self: center;
-    align-self: center;
-`
-
-const Bio02Name = styled.p`
-    font-size: 24px;
-    color: white;
-    font-variant-caps: small-caps;
-    padding-bottom: 10px;
-    text-align: center;
-`
-const Bio02Text = styled.p`
+const BioText = styled.p`
     font-size: 16px;
     color: white;    
 `
