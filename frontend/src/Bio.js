@@ -86,6 +86,7 @@ const BioArea = styled.div`
 
 const BioWrapper = styled.div`    
     background-color: #7e9e6c;
+    border-radius: 5px;
     height: 75vh;
     width: 40vw;
     justify-self: center;
