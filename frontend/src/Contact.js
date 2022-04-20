@@ -5,10 +5,12 @@ import plante from "./assets/plante.png"
 import React, { useState } from 'react'
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 import { ImSpinner3 } from "react-icons/im";
+import { MdErrorOutline } from "react-icons/md"
+import { RiCheckboxCircleLine } from "react-icons/ri"
 
 
 const containerStyle = {
-    width: '300px',
+    width: '500px',
     height: '300px'
 };
 
@@ -67,17 +69,18 @@ const Contact = () => {
                                 <TherapistInfoWrapper>
                                     <TherapistName>Hélène Blat</TherapistName>
                                     <TherapistPhone>(514) 557-1234</TherapistPhone>
-                                    <TherapistEmail>helene.blat@masso.com</TherapistEmail>
+                                    <TherapistEmail href="mailto:helene.blat@masso.com">helene.blat@masso.com</TherapistEmail>
                                 </TherapistInfoWrapper>
                                 <TherapistInfoWrapper>
                                     <TherapistName>Katia Breton</TherapistName>
                                     <TherapistPhone>(514) 557-4321</TherapistPhone>
-                                    <TherapistEmail>katia.breton@masso.com</TherapistEmail>
+                                    <TherapistEmail href="mailto:katia.breton@masso.com">katia.breton@masso.com</TherapistEmail>
                                 </TherapistInfoWrapper>
                             </TherapistsInfoArea>
+                            <Separator></Separator>
                             <CenterInfo>
                                 <CenterInfoWrapper>
-                                    <CenterName>Centre de Massothérapie Un Pas Vers Soi</CenterName>
+                                    <CenterName>Centre de Massothérapie<br></br>Un Pas Vers Soi</CenterName>
                                     <CenterAddress>2450 Rue Beaubien E, Montréal, QC H2G 1N4</CenterAddress>
                                     <CenterPhone>(514) 886-1558</CenterPhone>
                                 </CenterInfoWrapper>
@@ -93,7 +96,7 @@ const Contact = () => {
                         </ContactInfoWrapper>
                         <PlantImage src={plante} />
                         <EmailFormWrapper>
-                            <Title>Envoyez-nous un courriel</Title>
+                            <Title>Vous avez une question ?<br></br>Écrivez-nous !</Title>
                             <form onSubmit={handleSubmit}> 
                                 <InputWrapper>
                                     <Label htmlFor="name">Nom</Label>
@@ -110,11 +113,20 @@ const Contact = () => {
                                 <FooterWrapper>
                                     <SendButton>Envoyer</SendButton>
                                         {status === "error"
-                                        ? <ErroMsg>Erreur !</ErroMsg>
+                                        ?   <DialogWrapper>
+                                            <ErrorIcon size={25}/><Error>Erreur !</Error>
+                                            </DialogWrapper>
                                         : status === "message sent" 
-                                        ? <Dialog>Message envoyé !</Dialog>
+                                            
+                                        ?   <DialogWrapper>
+                                            <SuccessIcon size={25}/><Success>Message envoyé !</Success>
+                                            </DialogWrapper>
+
                                         : status === "sending" 
-                                        && <Spinner size={25}/>
+                                        &&  <DialogWrapper>
+                                            <Spinner size={25}/>
+                                            </DialogWrapper>
+                                        
                                         }
                                 </FooterWrapper>
                             </form>
@@ -146,14 +158,14 @@ const Main = styled.div`
     box-shadow: 1px 8px 8px #888888;
 `
 const ContactArea = styled.div`
-    //border: solid 1px black;
+    
     height: 80vh;
     display: grid;
     justify-content: center;
     grid-template-columns: 40% 10% 40%;    
 `
 const ContactInfoWrapper = styled.div`    
-    background-color: #7e9e6c;
+    border: solid 1px #7e9e6c;
     border-radius: 5px;
     height: 75vh;
     width: 40vw;
@@ -177,36 +189,38 @@ const TherapistsInfoArea = styled.div`
     gap: 10px;
 `
 const TherapistInfoWrapper = styled.div`
-    //width: 15vw;
+    height: 15vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 10px;
-    //border-radius: 5px;    
-    //border:solid 1px gray;
+    
 `
 const TherapistName = styled.p`
-    color: white;
+    color: #7e9e6c;
     font-size: 24px;
     font-variant-caps: small-caps;
 `
 const TherapistPhone = styled.p`
-    color: white;
+    color: #7e9e6c;
     font-size: 18px;
 `
 
-const TherapistEmail = styled.p`
-    color: white;
+const TherapistEmail = styled.a`
+    color: #7e9e6c;
     font-size: 18px;
+`
+const Separator = styled.div`
+    border: solid 1px #7e9e6c;
+    width: 100%;
 `
 const CenterInfo = styled.div`
     width: 30vw;
     height: 55vh;
     display: grid;
     grid-template-rows: 30% 70%;
-    //border-radius: 5px;
-    //border: solid 1px gray;
+    
     
 `
 const CenterInfoWrapper = styled.div`
@@ -217,18 +231,19 @@ const CenterInfoWrapper = styled.div`
     gap: 10px;
 `
 const CenterName = styled.p`
-    color: white;
+    color: #7e9e6c;
     font-size: 24px;
     font-variant-caps: small-caps;
+    text-align: center;
     
 `
 const CenterAddress = styled.p`
-    color: white;
+    color: #7e9e6c;
     font-size: 18px;
 `
 
 const CenterPhone = styled.p`
-    color: white;
+    color: #7e9e6c;
     font-size: 18px;
 `
 const GoogleMapWrapper = styled.div`
@@ -252,6 +267,7 @@ const Title = styled.p`
     font-size: 24px;
     padding: 20px;
     text-align: center;
+    line-height: 30px;
 `
 const InputWrapper = styled.div`
     display: grid;
@@ -295,7 +311,11 @@ const Message = styled.textarea`
     }
 `
 const FooterWrapper = styled.div`
-    display: flex;
+    margin-top: 10px;;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    //justify-content: space-between;
+    align-items: center;
     
 `
 const SendButton = styled.button`
@@ -317,15 +337,26 @@ const SendButton = styled.button`
     }
     
 `
-const ErroMsg = styled.p`
+const ErrorIcon = styled(MdErrorOutline )`
+    color: #f54248;
+`
+const Error = styled.p`
     font-size: 20px;
     color: #f54248;
 `
-
-const Dialog = styled.p`
+const SuccessIcon = styled(RiCheckboxCircleLine )`
+    color: #629147;
+`
+const Success = styled.p`
     font-size: 20px;
 `
+const DialogWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+`
 const Spinner = styled(ImSpinner3)`
+    justify-self: center;
     animation-name: spin;
     animation-duration: 4000ms;
     animation-iteration-count: infinite;

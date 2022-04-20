@@ -49,7 +49,7 @@ const HomepageWrapper = styled.div`
 
 const Image = styled.img`
     height: 95%;    
-    border-radius: 15px;
+    border-radius: 5px;
     opacity: 85%;
 `
 const SocialsWrapper=styled.div`
