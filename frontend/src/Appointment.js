@@ -4,7 +4,6 @@ import styled from "styled-components";
 import moment from "moment";
 
 import plante from "./assets/plante.png"
-import plante2 from "./assets/plante2.png"
 
 
 import {AdapterMoment} from "@mui/x-date-pickers/AdapterMoment";
@@ -14,7 +13,7 @@ import TextField from "@mui/material/TextField";
 import { ImSpinner3 } from "react-icons/im";
 import { MdErrorOutline } from "react-icons/md"
 import { RiCheckboxCircleLine } from "react-icons/ri"
-import { Dialog } from "@mui/material";
+
 
 
 
@@ -268,6 +267,7 @@ const Appointment = () => {
                                 onChange={handleCustomerCommentsChange} />
                             </Label>
                         </FormLeftWrapper>
+                        <PlantImage src={plante} />
                         <FormRightWrapper>
                             <Title>Personnalisez votre moment de détente</Title>
                                 <PickersWrapper>
@@ -352,7 +352,7 @@ const Appointment = () => {
                             <MassageTypeWrapper>
                                 <Select onChange={handleMassageTypeChange}>
                                     <OptGroup>
-                                        <Option value="">Choisissez</Option>
+                                        <Option value="">Type de massage</Option>
                                         <Option value="swedish">Suédois</Option>
                                         <Option value="californian">Californien</Option>
                                         <Option value="lomi-lomi">Suédois</Option>
@@ -406,12 +406,14 @@ const Main = styled.div`
     box-shadow: 1px 8px 8px #888888;
 `
 const FormArea = styled.div`
+
     height: 80vh;
     display: grid;
-    grid-template-columns: 50% 50%;    
+    justify-content: center;
+    grid-template-columns: 40% 10% 40%;    
 `
 const FormLeftWrapper = styled.div`    
-    //border: solid 1px #7e9e6c;
+    border: solid 1px #7e9e6c;
     border-radius: 5px;
     height: 75vh;
     width: 40vw;
@@ -422,7 +424,7 @@ const FormLeftWrapper = styled.div`
     
 `
 const FormRightWrapper = styled.div`    
-    //border: solid 1px #7e9e6c;
+    border: solid 1px #7e9e6c;
     border-radius: 5px;
     height: 75vh;
     width: 40vw;
@@ -454,13 +456,13 @@ const OptGroup = styled.optgroup`
 const Option = styled.option`
 `
 const Subtitle = styled.p`
-    font-size: 18px;
+    font-size: 20px;
     text-align: center;
 `
 const Label = styled.label`
     display: flex;
     flex-direction: column;
-    
+    font-size: 18px;
     gap: 10px;
 `
 const Radio = styled.input`
@@ -579,6 +581,12 @@ const TherapistWrapper = styled.div`
 const MassageTypeWrapper = styled.div`
     display: flex;
     justify-content: space-evenly;
+`
+const PlantImage = styled.img`
+    width: 100px;
+    justify-self: center;
+    align-self: center;
+    opacity: 70%;
 `
 
 export default Appointment;

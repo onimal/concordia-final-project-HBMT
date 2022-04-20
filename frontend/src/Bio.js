@@ -2,8 +2,9 @@ import styled from "styled-components";
 
 import helene_img from "../src/assets/helene.jpg"
 import katia_img from "../src/assets/katia.jpg"
-import plante from "../src/assets/plante-blanche2.png"
-import plante2 from "../src/assets/plante-blanche.png"
+import plante from "./assets/plante.png"
+
+
 
 const Bio = () => {
 
@@ -15,11 +16,9 @@ const Bio = () => {
                         <BioImageWrapper>
                             <BioImage src={helene_img}/>
                         </BioImageWrapper>
-                        <BioSeparator>
-                            <BioSeparatorImage src={plante}/>
-                        </BioSeparator>
+                        <BioName>Hélène Blat</BioName>
+                        <BioSeparator></BioSeparator>
                         <BioTextWrapper>
-                            <BioName>Hélène Blat</BioName>
                             <BioText>
                             Passionnée depuis son plus jeune âge par les massages,<br></br>
                             Hélène a choisi de se professionnaliser en se formant à l’école Fleur de Peau.<br></br><br></br> 
@@ -35,16 +34,14 @@ const Bio = () => {
                             </BioText>
                         </BioTextWrapper>
                     </BioWrapper>
-                    
+                    <PlantImage src={plante} />
                     <BioWrapper>
                         <BioImageWrapper>
                             <BioImage src={katia_img}/>
                         </BioImageWrapper>
-                        <BioSeparator>
-                            <BioSeparatorImage src={plante2}/>
-                        </BioSeparator>
+                        <BioName>Katia Breton</BioName>
+                        <BioSeparator></BioSeparator>
                         <BioTextWrapper>
-                            <BioName>Katia Breton</BioName>
                             <BioText>
                             Katia Breton est massothérapeute agréée certifiée, ainsi que réflexologue.<br></br><br></br>
                             Ses techniques sont le suédois, la fasciathérapie, la réflexologie,<br></br>
@@ -81,7 +78,8 @@ const Main = styled.div`
 const BioArea = styled.div`    
     height: 80vh;
     display: grid;
-    grid-template-columns: 50% 50%;    
+    justify-content: center;    
+    grid-template-columns: 40% 10% 40%;    
 `
 
 const BioWrapper = styled.div`    
@@ -91,12 +89,14 @@ const BioWrapper = styled.div`
     width: 40vw;
     justify-self: center;
     align-self: center;
-    display: grid;
-    grid-template-rows: 40% 15% 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    padding: 30px;
 `
 const BioImageWrapper = styled.div`    
-    height: 100%;
-    width: 100%;
+    height: 75%;
     justify-self: center;
     align-self: center;
     display: flex;
@@ -104,21 +104,16 @@ const BioImageWrapper = styled.div`
     align-items: center;
 `
 const BioImage = styled.img`
-    width: 40%;
+    width: 50%;
     border-radius: 5px;    
 `
 
-const BioSeparator = styled.div`    
-    height: 100%;
-    width: 100%;
-    justify-self: center;
-    align-self: center;
-    display: flex;
-    justify-content: center;
+const BioSeparator = styled.div`
+    border: solid 1px whitesmoke;
+    width: 50%;
+    
 `
-const BioSeparatorImage = styled.img`
-    width: 20%;
-`
+
 const BioTextWrapper = styled.div`    
     height: 100%;
     width: 90%;
@@ -134,8 +129,14 @@ const BioName = styled.p`
     text-align: center;
 `
 const BioText = styled.p`
-    font-size: 16px;
+    font-size: 18px;
     color: white;    
+`
+const PlantImage = styled.img`
+    width: 100px;
+    justify-self: center;
+    align-self: center;
+    opacity: 70%;
 `
 
 export default Bio;
