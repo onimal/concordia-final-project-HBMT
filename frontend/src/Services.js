@@ -48,8 +48,8 @@ const Services = () => {
                             Le massage californien est une invitation à prendre conscience de son être.<br></br><br></br>
                             C’est un massage à l’huile qui utilise des manœuvres de rythmes et de profondeur variées.<br></br><br></br>
                             Le massage californien se distingue par ses longs mouvements fluides et enveloppants.<br></br><br></br>
-                            Donné avec écoute, compassion et respect il favorise l’émergence de la mémoire corporelle ainsi qu’une grande détente.<br></br><br></br>
-                            Applications :<br></br><br></br>
+                            Donné avec écoute, compassion et respect il favorise l’émergence de la mémoire corporelle ainsi qu’une grande détente.<br></br><br></br><br></br>
+                            Les bienfaits :<br></br><br></br>
 
                             Douleurs chroniques<br></br>
                             Insomnie<br></br>
@@ -108,7 +108,7 @@ const Services = () => {
                         <DescriptionWrapper>
                             <Description>
                             Cette technique utilise des mouvements doux et circulaires qui dirigent la lymphe vers les ganglions lymphatiques , ce qui favorise le nettoyage, la désintoxication<br></br><br></br>
-                            et le désengorgement du tissu conjonctif et des ganglions lymphatiques.<br></br><br></br>
+                            et le désengorgement du tissu conjonctif et des ganglions lymphatiques.<br></br><br></br><br></br>
                             Les bienfaits :<br></br><br></br>
 
                             Stimule le système immunitaire.<br></br>

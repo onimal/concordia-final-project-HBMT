@@ -3,6 +3,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import moment from "moment";
 
+
 import plante from "./assets/plante.png"
 
 
@@ -15,6 +16,8 @@ import { MdErrorOutline } from "react-icons/md"
 import { RiCheckboxCircleLine } from "react-icons/ri"
 
 
+import Confirmation from "./Confirmation";
+
 
 
 const Appointment = () => {
@@ -25,7 +28,9 @@ const Appointment = () => {
 
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [selectedSlot, setSelectedSlot] = useState("100");
+    const [slotLabel, setSlotLabel] = useState("123");
     const [selectedLocation, setSelectedLocation] = useState("Clinic");
+    const [locationLabel, setLocationLabel] = useState ("");
     const [selectedTherapist, setSelectedTherapist] = useState("Hélène Blat");
     const [selectedMassageType, setSelectedMassageType] = useState("Suédois");
     const [selectedDuration, setSelectedDuration] = useState("60");    
@@ -40,62 +45,104 @@ const Appointment = () => {
     
     const appointmentDate = moment(selectedDate).format('MMMM Do YYYY');
 
+
+    
+
     const handleCustomerLastNameChange = (event) => {
         setCustomerLastName(event.target.value);        
-    }
+    };
     
     const handleCustomerFirstNameChange = (event) => {        
         setCustomerFirstName(event.target.value);        
-    }
+    };
 
     const handleCustomerEmailChange = (event) => {        
         setCustomerEmail(event.target.value);        
-    }
+    };
 
     const handleCustomerPhoneChange = (event) => {        
         setCustomerPhone(event.target.value);        
-    }
+    };
 
     const handleCustomerAddressChange = (event) => {
-        setCustomerAddress(event.target.value);        
-    }
+        setCustomerAddress(event.target.value); 
+        console.log(event.target.value)
+    };
 
     const handleCustomerZipCodeChange = (event) => {
         setCustomerZipCode(event.target.value);
-    }
+    };
 
     const handleCustomerCityChange = (event) => {        
         setCustomerCity(event.target.value);        
-    }
+    };
 
     const handleCustomerCommentsChange = (event) => {        
         setCustomerComments(event.target.value);        
-    }
+    };
 
     const handleDateChange = (date) => {
         setSelectedDate(date._d);
-    }
+    };
 
     const handleSlotChange = (event) => {
         event.preventDefault();
         setSelectedSlot(event.target.value);
-    }
+        switch(selectedSlot) {
+            case "100" :
+                setSlotLabel("10 heures");
+                break;
+            case "200" :
+                setSlotLabel("11 heures");
+                break;
+            case "300" :
+                setSlotLabel("12 heures");
+                break;
+            case "400" :
+                setSlotLabel("13 heures");
+                break;
+            case "500" :
+                setSlotLabel("14 heures");
+                break;
+            case "600" :
+                setSlotLabel("15 heures");
+                break;
+            case "700" :
+                setSlotLabel("16 heures");
+                break;
+            case "800" :
+                setSlotLabel("17 heures");
+                break;
+            case "900" :
+                setSlotLabel("18 heures");
+                break;
+        }
+        console.log (slotLabel);
+    };
     
     const handleLocationChange = (event) => {
         setSelectedLocation(event.target.value);
-    }
+        if (event.target.value === "Clinic") {
+            setLocationLabel(" au Centre Un Pas Vers Soi")
+        } else if (event.target.value === "Home") {
+            setLocationLabel(`${customerAddress}, ${customerCity}, ${customerZipCode}`)
+        }
+        console.log(locationLabel);
+    };
+
+    
     
     const handleTherapistChange = (event) => {        
         setSelectedTherapist(event.target.value);
-    }
+    };
 
     const handleMassageTypeChange = (event) => {
         setSelectedMassageType(event.target.value);
-    }
+    };
 
     const handleDurationChange = (event) => {
         setSelectedDuration(event.target.value);
-    }
+    };
 
     const submitNewAppointment = (event) => {
         event.preventDefault();
@@ -183,211 +230,221 @@ const Appointment = () => {
         event.target.reset();
         
         
-    }
+    };
 
 
 
-    return (
+    if (status === "success") {
 
-        <Wrapper>
-            <form onSubmit={submitNewAppointment}>
-                <Main>
-                    <FormArea>
-                        <FormLeftWrapper>
-                            <Title>Parlez-nous de vous...</Title>
-                            <Label htmlFor="lname">Nom
-                            <Input 
-                                type="text" 
-                                id="lname" 
-                                name="lname"
-                                value={customerLastName}
-                                onChange={handleCustomerLastNameChange}
-                                required />
-                            </Label>
-                            <Label htmlFor="fname">Prénom
-                            <Input 
-                                type="text" 
-                                id="fname" 
-                                name="fname"
-                                value={customerFirstName}
-                                onChange={handleCustomerFirstNameChange}
-                                required />
-                            </Label>
-                            <Label htmlFor="email">Courriel
-                            <Input 
-                                type="email" 
-                                id="email" 
-                                name="email" 
-                                value={customerEmail}
-                                onChange={handleCustomerEmailChange}
-                                required />
-                            </Label>
-                            <Label htmlFor="phone">Téléphone
-                            <Input 
-                                type="tel" 
-                                id="phone" 
-                                name="phone"
-                                value={customerPhone}
-                                onChange={handleCustomerPhoneChange}
-                                required />
-                            </Label>
-                            <Label htmlFor="address">Adresse
-                            <Input 
-                                type="text" 
-                                id="address" 
-                                name="address" 
-                                value={customerAddress}
-                                onChange={handleCustomerAddressChange}
-                                required />
-                            </Label>
-                            <Label htmlFor="zipcode">Code postal
-                            <Input 
-                                type="text" 
-                                id="zipcode" 
-                                name="zipcode"
-                                value={customerZipCode}
-                                onChange={handleCustomerZipCodeChange}
-                                required />
-                            </Label>
-                            <Label htmlFor="city">Ville
-                            <Input 
-                                type="text" 
-                                id="city" 
-                                name="city" 
-                                value={customerCity}
-                                onChange={handleCustomerCityChange}
-                                required />
-                            </Label>
-                            <Label htmlFor="city">Commentaires
-                            <CommentsInput 
-                                wrap="hard"
-                                id="comments" 
-                                name="comments"
-                                value={customerComments}
-                                onChange={handleCustomerCommentsChange} />
-                            </Label>
-                        </FormLeftWrapper>
-                        <PlantImage src={plante} />
-                        <FormRightWrapper>
-                            <Title>Personnalisez votre moment de détente</Title>
-                                <PickersWrapper>
-                                    <LocalizationProvider dateAdapter={AdapterMoment}>
-                                    <DatePicker
-                                            label="Sélectionner la date"                                
-                                            value={selectedDate}
-                                            onChange={handleDateChange}
-                                            minDate={moment()}
-                                            showTodayButton={true}                                
-                                            renderInput={(props) => <TextField {...props} />}
-                                    />
-                                    </LocalizationProvider>
-                                    <Select onChange={handleSlotChange}>
+        
+        return (
+            <Confirmation 
+                appmtdate={appointmentDate}
+                appmttime={slotLabel}
+                appmtlocation={locationLabel}
+                appmttherapist={selectedTherapist} />
+        )
+
+    } else {
+
+        return (
+
+            <Wrapper>
+                <form onSubmit={submitNewAppointment}>
+                    <Main>
+                        <FormArea>
+                            <FormLeftWrapper>
+                                <Title>Parlez-nous de vous...</Title>
+                                <Label htmlFor="fname">Prénom
+                                <Input 
+                                    type="text" 
+                                    id="fname" 
+                                    name="fname"
+                                    value={customerFirstName}
+                                    onChange={handleCustomerFirstNameChange}
+                                    required />
+                                </Label>
+                                <Label htmlFor="lname">Nom
+                                <Input 
+                                    type="text" 
+                                    id="lname" 
+                                    name="lname"
+                                    value={customerLastName}
+                                    onChange={handleCustomerLastNameChange}
+                                    required />
+                                </Label>
+                                <Label htmlFor="email">Courriel
+                                <Input 
+                                    type="email" 
+                                    id="email" 
+                                    name="email" 
+                                    value={customerEmail}
+                                    onChange={handleCustomerEmailChange}
+                                    required />
+                                </Label>
+                                <Label htmlFor="phone">Téléphone
+                                <Input 
+                                    type="tel" 
+                                    id="phone" 
+                                    name="phone"
+                                    value={customerPhone}
+                                    onChange={handleCustomerPhoneChange}
+                                    required />
+                                </Label>
+                                <Label htmlFor="address">Adresse
+                                <Input 
+                                    type="text" 
+                                    id="address" 
+                                    name="address" 
+                                    value={customerAddress}
+                                    onChange={handleCustomerAddressChange}
+                                    required />
+                                </Label>
+                                <Label htmlFor="zipcode">Code postal
+                                <Input 
+                                    type="text" 
+                                    id="zipcode" 
+                                    name="zipcode"
+                                    value={customerZipCode}
+                                    onChange={handleCustomerZipCodeChange}
+                                    required />
+                                </Label>
+                                <Label htmlFor="city">Ville
+                                <Input 
+                                    type="text" 
+                                    id="city" 
+                                    name="city" 
+                                    value={customerCity}
+                                    onChange={handleCustomerCityChange}
+                                    required />
+                                </Label>
+                                <Label htmlFor="city">Commentaires
+                                <CommentsInput 
+                                    wrap="hard"
+                                    id="comments" 
+                                    name="comments"
+                                    value={customerComments}
+                                    onChange={handleCustomerCommentsChange} />
+                                </Label>
+                            </FormLeftWrapper>
+                            <PlantImage src={plante} />
+                            <FormRightWrapper>
+                                <Title>Personnalisez votre moment de détente</Title>
+                                    <PickersWrapper>
+                                        <LocalizationProvider dateAdapter={AdapterMoment}>
+                                        <DatePicker
+                                                label="Sélectionner la date"                                
+                                                value={selectedDate}
+                                                onChange={handleDateChange}
+                                                minDate={moment()}
+                                                showTodayButton={true}                                
+                                                renderInput={(props) => <TextField {...props} />}
+                                        />
+                                        </LocalizationProvider>
+                                        <Select onChange={handleSlotChange}>
+                                            <OptGroup>
+                                                <Option value="" required>Horaire</Option>
+                                                <Option value="100">10h - 11h</Option>
+                                                <Option value="200">11h - 12h</Option>
+                                                <Option value="300">12h - 13h</Option>
+                                                <Option value="400">13h - 14h</Option>
+                                                <Option value="500">14h - 15h</Option>
+                                                <Option value="600">15h - 16h</Option>
+                                                <Option value="700">16h - 17h</Option>
+                                                <Option value="800">17h - 18h</Option>
+                                                <Option value="900">18h - 19h</Option>
+                                            </OptGroup>
+                                        </Select>
+                                    </PickersWrapper>
+                                <Subtitle>Choisissez le lieu de votre massage :</Subtitle>                            
+                                <RadioGroupWrapper>
+                                    <Label>
+                                        <RadioWrapper> 
+                                            <Radio
+                                                type="radio"
+                                                name="location"                            
+                                                value="Clinic"
+                                                onChange={handleLocationChange}
+                                                defaultChecked
+                                                required
+                                            />Au centre "Un pas vers Soi"
+                                        </RadioWrapper>
+                                    </Label>
+                                    <Label>
+                                        <RadioWrapper>    
+                                            <Radio
+                                                type="radio"
+                                                name="location"                            
+                                                value="Home"
+                                                onChange={handleLocationChange}
+                                                required
+                                            />À votre domicile
+                                        </RadioWrapper>
+                                    </Label>
+                                </RadioGroupWrapper>
+                                <Subtitle>Choisissez votre massothérapeute :</Subtitle>
+                                <TherapistWrapper>
+                                    <Label>
+                                        <RadioWrapper>
+                                            <Radio
+                                                type="radio"
+                                                name="therapist"                            
+                                                value="Hélène Blat"
+                                                onChange={handleTherapistChange}
+                                                defaultChecked
+                                                required
+                                            />Hélène Blat
+                                        </RadioWrapper>
+                                    </Label>
+                                    <Label>
+                                        <RadioWrapper>
+                                            <Radio
+                                                type="radio"
+                                                name="therapist"                            
+                                                value="Katia Breton"
+                                                onChange={handleTherapistChange}
+                                                required
+                                            />Katia Breton
+                                        </RadioWrapper>
+                                    </Label>
+                                </TherapistWrapper>
+                                <Subtitle>Quel type de massage souhaitez-vous ?</Subtitle>
+                                <MassageTypeWrapper>
+                                    <Select onChange={handleMassageTypeChange}>
                                         <OptGroup>
-                                            <Option value="" required>Horaire</Option>
-                                            <Option value="100">10h - 11h</Option>
-                                            <Option value="200">11h - 12h</Option>
-                                            <Option value="300">12h - 13h</Option>
-                                            <Option value="400">13h - 14h</Option>
-                                            <Option value="500">14h - 15h</Option>
-                                            <Option value="600">15h - 16h</Option>
-                                            <Option value="700">16h - 17h</Option>
-                                            <Option value="800">17h - 18h</Option>
-                                            <Option value="900">18h - 19h</Option>
+                                            <Option value="">Type de massage</Option>
+                                            <Option value="swedish">Suédois</Option>
+                                            <Option value="californian">Californien</Option>
+                                            <Option value="lomi-lomi">Lomi Lomi</Option>
+                                            <Option value="drainage">Drainage Lymphatique</Option>
                                         </OptGroup>
                                     </Select>
-                                </PickersWrapper>
-                            <Subtitle>Choisissez le lieu de votre massage :</Subtitle>                            
-                            <RadioGroupWrapper>
-                                <Label>
-                                    <RadioWrapper> 
-                                        <Radio
-                                            type="radio"
-                                            name="location"                            
-                                            value="Clinic"
-                                            onChange={handleLocationChange}
-                                            defaultChecked
-                                            required
-                                        />Au centre "Un pas vers Soi"
-                                    </RadioWrapper>
-                                </Label>
-                                <Label>
-                                    <RadioWrapper>    
-                                        <Radio
-                                            type="radio"
-                                            name="location"                            
-                                            value="Home"
-                                            onChange={handleLocationChange}
-                                            required
-                                        />À votre domicile
-                                    </RadioWrapper>
-                                </Label>
-                            </RadioGroupWrapper>
-                            <Subtitle>Choisissez votre massothérapeute :</Subtitle>
-                            <TherapistWrapper>
-                                <Label>
-                                    <RadioWrapper>
-                                        <Radio
-                                            type="radio"
-                                            name="therapist"                            
-                                            value="Hélène Blat"
-                                            onChange={handleTherapistChange}
-                                            defaultChecked
-                                            required
-                                        />Hélène Blat
-                                    </RadioWrapper>
-                                </Label>
-                                <Label>
-                                    <RadioWrapper>
-                                        <Radio
-                                            type="radio"
-                                            name="therapist"                            
-                                            value="Katia Breton"
-                                            onChange={handleTherapistChange}
-                                            required
-                                        />Katia Breton
-                                    </RadioWrapper>
-                                </Label>
-                            </TherapistWrapper>
-                            <Subtitle>Quel type de massage souhaitez-vous ?</Subtitle>
-                            <MassageTypeWrapper>
-                                <Select onChange={handleMassageTypeChange}>
-                                    <OptGroup>
-                                        <Option value="">Type de massage</Option>
-                                        <Option value="swedish">Suédois</Option>
-                                        <Option value="californian">Californien</Option>
-                                        <Option value="lomi-lomi">Suédois</Option>
-                                        <Option value="drainage">Drainage Lymphatique</Option>
-                                    </OptGroup>
-                                </Select>
-                                <Select onChange={handleDurationChange}>
-                                    <Option value="">Durée</Option>
-                                    <Option value="60">60 min.</Option>
-                                    <Option value="75">75 min.</Option>
-                                    <Option value="90">90 min.</Option>
-                                </Select>
-                                </MassageTypeWrapper>
-                            <DialogArea>
-                                {status === "loading"
-                                    ?   <DialogWrapper>
-                                        <Spinner size={25}/>
-                                        </DialogWrapper>
-                                            :   status === "error"
-                                                ?   <DialogWrapper>
-                                                    <ErrorIcon size={25}/><ErrorMsg>{dialog}</ErrorMsg>
-                                                    </DialogWrapper>
-                                                        :   status === "success"
-                                                            &&  <DialogWrapper>
-                                                                <SuccessIcon size={25}/><ConfirmationMsg>{dialog}</ConfirmationMsg>
-                                                                </DialogWrapper>
-                                }
-                            </DialogArea>
-                            <BookButton>Réservez votre massage</BookButton>
-                        </FormRightWrapper>
-                    </FormArea>
-                </Main>
-            </form>
-        </Wrapper>
-    )
+                                    <Select onChange={handleDurationChange}>
+                                        <Option value="">Durée</Option>
+                                        <Option value="60">60 min.</Option>
+                                        <Option value="75">75 min.</Option>
+                                        <Option value="90">90 min.</Option>
+                                    </Select>
+                                    </MassageTypeWrapper>
+                                <DialogArea>
+                                    {status === "loading"
+                                        ?   <DialogWrapper>
+                                            <Spinner size={25}/>
+                                            </DialogWrapper>
+                                                :   status === "error"
+                                                    &&   <DialogWrapper>
+                                                        <ErrorIcon size={25}/><ErrorMsg>{dialog}</ErrorMsg>
+                                                        </DialogWrapper>
+                                                            
+                                    }
+                                </DialogArea>
+                                <BookButton>Réservez votre massage</BookButton>
+                            </FormRightWrapper>
+                        </FormArea>
+                    </Main>
+                </form>
+            </Wrapper>
+        )};
 };
 
 const Wrapper = styled.div`
