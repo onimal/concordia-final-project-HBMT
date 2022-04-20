@@ -13,13 +13,13 @@ const Bio = () => {
             <Main>
                 <BioArea>
                     <BioWrapper>
-                        <BioImageWrapper>
-                            <BioImage src={helene_img}/>
-                        </BioImageWrapper>
-                        <BioName>Hélène Blat</BioName>
-                        <BioSeparator></BioSeparator>
-                        <BioTextWrapper>
-                            <BioText>
+                        <ImageWrapper>
+                            <Image src={helene_img}/>
+                        </ImageWrapper>
+                        <Name>Hélène Blat</Name>
+                        <Separator></Separator>
+                        <TextWrapper>
+                            <Text>
                             Passionnée depuis son plus jeune âge par les massages,<br></br>
                             Hélène a choisi de se professionnaliser en se formant à l’école Fleur de Peau.<br></br><br></br> 
                             La diversité de ses techniques telles que le Suédois, le Californien, l’Oriental, le Lomi-Lomi 
@@ -31,18 +31,18 @@ const Bio = () => {
                             Elle utilise ses mains comme des instruments pour faire circuler les énergies 
                             et ainsi amener à l’harmonisation de l’être dans son ensemble.<br></br><br></br>
                             Membre du RMPQ
-                            </BioText>
-                        </BioTextWrapper>
+                            </Text>
+                        </TextWrapper>
                     </BioWrapper>
                     <PlantImage src={plante} />
                     <BioWrapper>
-                        <BioImageWrapper>
-                            <BioImage src={katia_img}/>
-                        </BioImageWrapper>
-                        <BioName>Katia Breton</BioName>
-                        <BioSeparator></BioSeparator>
-                        <BioTextWrapper>
-                            <BioText>
+                        <ImageWrapper>
+                            <Image src={katia_img}/>
+                        </ImageWrapper>
+                        <Name>Katia Breton</Name>
+                        <Separator></Separator>
+                        <TextWrapper>
+                            <Text>
                             Katia Breton est massothérapeute agréée certifiée, ainsi que réflexologue.<br></br><br></br>
                             Ses techniques sont le suédois, la fasciathérapie, la réflexologie,<br></br>
                             la thérapie crânienne et le massage pour personnes âgées.<br></br><br></br>
@@ -51,8 +51,8 @@ const Bio = () => {
                             L’écoute ainsi que l’intention dans ses mains lui permettent d’accompagner la personne vers un meilleur équilibre et bien-être.<br></br><br></br>
                             Elle travaille en respectant chaque personne dans sa globalité.<br></br><br></br>
                             Membre de la FQM
-                            </BioText>
-                        </BioTextWrapper>
+                            </Text>
+                        </TextWrapper>
                     </BioWrapper>                    
                 </BioArea>
             </Main>
@@ -95,7 +95,7 @@ const BioWrapper = styled.div`
     gap: 30px;
     padding: 30px;
 `
-const BioImageWrapper = styled.div`    
+const ImageWrapper = styled.div`    
     height: 75%;
     justify-self: center;
     align-self: center;
@@ -103,32 +103,32 @@ const BioImageWrapper = styled.div`
     justify-content: center;
     align-items: center;
 `
-const BioImage = styled.img`
+const Image = styled.img`
     width: 50%;
     border-radius: 5px;    
 `
 
-const BioSeparator = styled.div`
+const Separator = styled.div`
     border: solid 1px whitesmoke;
     width: 50%;
     
 `
 
-const BioTextWrapper = styled.div`    
+const TextWrapper = styled.div`    
     height: 100%;
     width: 90%;
     justify-self: center;
     align-self: center;
 `
 
-const BioName = styled.p`
+const Name = styled.p`
     font-size: 24px;
     color: white;
     font-variant-caps: small-caps;
     padding-bottom: 10px;
     text-align: center;
 `
-const BioText = styled.p`
+const Text = styled.p`
     font-size: 18px;
     color: white;    
 `
