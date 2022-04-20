@@ -1,15 +1,15 @@
 import styled from "styled-components";
 
+import plante from "./assets/plante.png"
+
 import React, { useState } from 'react'
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 import { ImSpinner3 } from "react-icons/im";
 
-import plante from "./assets/plante.png"
-import plante2 from "./assets/plante2.png"
 
 const containerStyle = {
-    width: '250px',
-    height: '250px'
+    width: '300px',
+    height: '300px'
 };
 
 const center = {
@@ -24,18 +24,7 @@ const Contact = () => {
         googleMapsApiKey: "AIzaSyBVKfjw0XtqPZGZ1cFLvnEmUW1Wup_vQvk"
         })
     
-        //const [map, setMap] = React.useState(null)
-    
-        //const onLoad = React.useCallback(function callback(map) {
-            //const bounds = new window.google.maps.LatLngBounds();
-            //map.fitBounds(bounds);
-            //setMap(map)
-        //}, [])
-    
-        //const onUnmount = React.useCallback(function callback(map) {
-        //    setMap(null)
-        //}, [])
-        
+
         // e-mail functionality built with the help of this source: https://w3collective.com/react-contact-form/
         const [status, setStatus] = useState("idle");
 
@@ -60,7 +49,7 @@ const Contact = () => {
 
             setStatus("Submit");
             let result = await response.json();
-            //alert(result.status);
+            
             setStatus(result.status)
             //console.log(status);
             event.target.reset();
@@ -71,79 +60,75 @@ const Contact = () => {
 
         return isLoaded ? (
             <Wrapper>
-            <ContactWrapper>
-                <ContactArea>
-                    <ContactInfo>
-                        <TherapistsInfo>
-                            <TherapistInfo01>
-                                <Therapist01Name>Hélène Blat</Therapist01Name>
-                                <Therapist01Phone>(514) 557-1234</Therapist01Phone>
-                                <Therapist01Email>helene.blat@masso.com</Therapist01Email>
-                            </TherapistInfo01>
-                            <TherapistInfo02>
-                                <Therapist02Name>Katia Breton</Therapist02Name>
-                                <Therapist02Phone>(514) 557-4321</Therapist02Phone>
-                                <Therapist02Email>katia.breton@masso.com</Therapist02Email>
-                            </TherapistInfo02>
-                        </TherapistsInfo>
-                        <CenterInfo>
-                            <CenterInfoWrapper>
-                                <CenterName>Centre de Massothérapie Un Pas Vers Soi</CenterName>
-                                <CenterAddress>2450 Rue Beaubien E, Montréal, QC H2G 1N4</CenterAddress>
-                                <CenterPhone>(514) 886-1558</CenterPhone>
-                            </CenterInfoWrapper>
-                        <GoogleMapWrapper>
-                            <GoogleMap
-                            mapContainerStyle={containerStyle}
-                            center={center}
-                            zoom={18}
-                            //onLoad={onLoad}
-                            //onUnmount={onUnmount}
-                            >{}<></>
-                            </GoogleMap>
-                        </GoogleMapWrapper>
-                        </CenterInfo>
-                    </ContactInfo>
-                </ContactArea>
-                <SeparatorArea>
-                    <PlantImage src={plante} />
-                    <PlantImage2 src={plante2} />
-                </SeparatorArea>
-                <EmailFormArea>
-                <form onSubmit={handleSubmit}> 
-                    <EmailFormWrapper>                    
-                            <SenderWrapper>
-                                <SenderNameLabel htmlFor="name">Nom</SenderNameLabel>
-                                <SenderName type="text" id="name" name="name" required />
-                                <SenderEmailLabel htmlFor="email">Courriel</SenderEmailLabel>
-                                <SenderEmail type="email" id="email" name="email" required />
-                            </SenderWrapper>
-                            <SubjectWrapper>
-                                <SubjectLabel htmlFor="subject">Objet</SubjectLabel>
-                                <Subject type="text" id="subject" name="subject" required />
-                            </SubjectWrapper>
-                            <MessageWrapper>
-                                <MessageLabel htmlFor="message">Message</MessageLabel>
-                                <Message type="text" wrap="soft" id="message" name="message" required />
-                            </MessageWrapper>
-                            <FooterWrapper>
-                                <SendButton>Envoyer</SendButton>
-                                    {status === "error"
-                                    ? <ErroMsg>Erreur !</ErroMsg>
-                                    : status === "message sent" 
-                                    ? <Dialog>Message envoyé !</Dialog>
-                                    : status === "sending" 
-                                    && <Spinner size={25}/>
-                                    }
-                            </FooterWrapper>
-                    </EmailFormWrapper>
-                </form>
-                </EmailFormArea>
-            </ContactWrapper>
+                <Main>
+                    <ContactArea>
+                        <ContactInfoWrapper>
+                            <TherapistsInfoArea>
+                                <TherapistInfoWrapper>
+                                    <TherapistName>Hélène Blat</TherapistName>
+                                    <TherapistPhone>(514) 557-1234</TherapistPhone>
+                                    <TherapistEmail>helene.blat@masso.com</TherapistEmail>
+                                </TherapistInfoWrapper>
+                                <TherapistInfoWrapper>
+                                    <TherapistName>Katia Breton</TherapistName>
+                                    <TherapistPhone>(514) 557-4321</TherapistPhone>
+                                    <TherapistEmail>katia.breton@masso.com</TherapistEmail>
+                                </TherapistInfoWrapper>
+                            </TherapistsInfoArea>
+                            <CenterInfo>
+                                <CenterInfoWrapper>
+                                    <CenterName>Centre de Massothérapie Un Pas Vers Soi</CenterName>
+                                    <CenterAddress>2450 Rue Beaubien E, Montréal, QC H2G 1N4</CenterAddress>
+                                    <CenterPhone>(514) 886-1558</CenterPhone>
+                                </CenterInfoWrapper>
+                                <GoogleMapWrapper>
+                                    <GoogleMap
+                                    mapContainerStyle={containerStyle}
+                                    center={center}
+                                    zoom={18}
+                                    >{}<></>
+                                    </GoogleMap>
+                                </GoogleMapWrapper>
+                            </CenterInfo>
+                        </ContactInfoWrapper>
+                        <PlantImage src={plante} />
+                        <EmailFormWrapper>
+                            <Title>Envoyez-nous un courriel</Title>
+                            <form onSubmit={handleSubmit}> 
+                                <InputWrapper>
+                                    <Label htmlFor="name">Nom</Label>
+                                    <Input type="text" id="name" name="name" required />
+                                    <Label htmlFor="email">Courriel</Label>
+                                    <Input type="email" id="email" name="email" required />
+                                    <Label htmlFor="subject">Objet</Label>
+                                    <Input type="text" id="subject" name="subject" required />                                
+                                <MessageWrapper>
+                                    <Label htmlFor="message">Message</Label>
+                                    <Message type="text" wrap="soft" id="message" name="message" required />
+                                </MessageWrapper>
+                                </InputWrapper>
+                                <FooterWrapper>
+                                    <SendButton>Envoyer</SendButton>
+                                        {status === "error"
+                                        ? <ErroMsg>Erreur !</ErroMsg>
+                                        : status === "message sent" 
+                                        ? <Dialog>Message envoyé !</Dialog>
+                                        : status === "sending" 
+                                        && <Spinner size={25}/>
+                                        }
+                                </FooterWrapper>
+                            </form>
+                        </EmailFormWrapper>
+                    </ContactArea>
+                
+                
+                
+                </Main>
             </Wrapper>
         )
         : <></>
 }
+
 
 const Wrapper = styled.div`
     width: 100vw;
@@ -152,93 +137,76 @@ const Wrapper = styled.div`
     justify-content: center;
 `
 
-const ContactWrapper = styled.div`
+const Main = styled.div`
     height: 85vh;
     width: 98vw;
     margin-top: 0px;
     border-radius: 0px 0px 15px 15px;
     background-color: white;
     box-shadow: 1px 8px 8px #888888;
-    display: grid;
-    grid-template-columns: 40% 10% 50%;
-    justify-content: center;  
 `
 const ContactArea = styled.div`
-    height: 85vh;
-    display: flex;
-    flex-direction: column;   
-    justify-content: center;
-`
-
-const ContactInfo = styled.div`
-    width: 30vw;
-    height: 65vh;
+    //border: solid 1px black;
+    height: 80vh;
     display: grid;
-    grid-template-rows: 15% 15% 70%;
-    gap: 20px;
-    align-self: center;    
+    justify-content: center;
+    grid-template-columns: 40% 10% 40%;    
 `
-const TherapistsInfo = styled.div`
+const ContactInfoWrapper = styled.div`    
+    background-color: #7e9e6c;
+    border-radius: 5px;
+    height: 75vh;
+    width: 40vw;
+    justify-self: center;
+    align-self: center;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    
+`
+const PlantImage = styled.img`
+    width: 100px;
+    justify-self: center;
+    align-self: center;
+    opacity: 70%;
+`
+
+const TherapistsInfoArea = styled.div`
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     gap: 10px;
 `
-const TherapistInfo01 = styled.div`
-    width: 15vw;
+const TherapistInfoWrapper = styled.div`
+    //width: 15vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 10px;
-    border-radius: 5px;    
-    border:solid 1px gray;
+    //border-radius: 5px;    
+    //border:solid 1px gray;
 `
-const Therapist01Name = styled.p`
-    color: #7e9e6c;
-    font-size: 20px;
+const TherapistName = styled.p`
+    color: white;
+    font-size: 24px;
     font-variant-caps: small-caps;
 `
-const Therapist01Phone = styled.p`
-    color: #7e9e6c;
-    font-size: 16px;
+const TherapistPhone = styled.p`
+    color: white;
+    font-size: 18px;
 `
 
-const Therapist01Email = styled.p`
-    color: #7e9e6c;
-    font-size: 16px;
+const TherapistEmail = styled.p`
+    color: white;
+    font-size: 18px;
 `
-
-const TherapistInfo02 = styled.div`
-    width: 15vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    border-radius: 5px;    
-    border: solid 1px gray;
-`
-const Therapist02Name = styled.p`
-    color: #7e9e6c;
-    font-size: 20px;
-    font-variant-caps: small-caps;
-`
-const Therapist02Phone = styled.p`
-    color: #7e9e6c;
-    font-size: 16px;
-`
-
-const Therapist02Email = styled.p`
-    color: #7e9e6c;
-    font-size: 16px;
-`
-
 const CenterInfo = styled.div`
-    height: 45vh;
+    width: 30vw;
+    height: 55vh;
     display: grid;
     grid-template-rows: 30% 70%;
-    border-radius: 5px;
-    border: solid 1px gray;
+    //border-radius: 5px;
+    //border: solid 1px gray;
     
 `
 const CenterInfoWrapper = styled.div`
@@ -249,149 +217,86 @@ const CenterInfoWrapper = styled.div`
     gap: 10px;
 `
 const CenterName = styled.p`
-    color: #7e9e6c;
-    font-size: 20px;
+    color: white;
+    font-size: 24px;
     font-variant-caps: small-caps;
     
 `
 const CenterAddress = styled.p`
-    color: #7e9e6c;
-    font-size: 16px;
+    color: white;
+    font-size: 18px;
 `
 
 const CenterPhone = styled.p`
-    color: #7e9e6c;
-    font-size: 16px;
+    color: white;
+    font-size: 18px;
 `
-
 const GoogleMapWrapper = styled.div`
     justify-self: center;
     align-self: flex-end;
     padding-bottom: 40px;
 `
-
-const SeparatorArea = styled.div`
+const EmailFormWrapper = styled.div`    
+    border: solid 1px #7e9e6c;
+    border-radius: 5px;
+    height: 75vh;
+    width: 40vw;
+    justify-self: center;
+    align-self: center;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    margin-left: 20px;
+    align-items: center;
+    //gap: 20px;
 `
-const PlantImage = styled.img`    
-    width: 90px;
-    height: 200px;
-    
+const Title = styled.p`
+    font-size: 24px;
+    padding: 20px;
+    text-align: center;
 `
-const PlantImage2 = styled.img`    
-    width: 90px;
-    height: 200px;   
-    
-`
-
-const EmailFormArea = styled.div`
-    
-    height: 78vh;
-    display: flex;
-    flex-direction: column;   
-    justify-content: center;
-`
-const EmailFormWrapper = styled.div`
-    
-    width: 45vw;
-    height: 60vh;    
-    align-self: center; 
-    
-`
-const SenderWrapper = styled.div`
-    
-    display: flex;
-    flex-direction: column;    
-    padding-left: 20px;
-    padding-right: 20px;
-    border-color: #7e9e6c;
-    border-radius: 10px;
+const InputWrapper = styled.div`
+    display: grid;
     gap: 10px;
-    
 `
-const SenderNameLabel = styled.label`
-    font-size: 16px;
-    color: #7e9e6c;
-`
-const SenderName = styled.input`
-    all: unset;
-    height: 30px;
-    //border-radius: 5px;
-    border: solid 1px gray;
-    color: gray;
-    padding-left: 10px;
-    padding-right: 10px;
-`
-const SenderEmailLabel = styled.label`
-    font-size: 16px;
-    color: #7e9e6c;
-`
-const SenderEmail = styled.input`
-    all: unset;
-    height: 30px;
-    //border-radius: 5px;
-    border: solid 1px gray;
-    color: gray;
-    padding-left: 10px;
-    padding-right: 10px;
-`
-const SubjectWrapper = styled.div`
+const Label = styled.label`
     display: flex;
     flex-direction: column;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 10px;
-    border-color: #7e9e6c;
-    border-radius: 10px;
-    
+    font-size: 18px;
+    gap: 10px;
+`
+const Input = styled.input`
+    width: 30vw;
+    border: 0px;
+    border-bottom: solid 1px #7e9e6c;
+    padding-left: 10px;
+    font-size: 16px;
+    &:focus{
+        outline: none;
+    }
 `
 
-const SubjectLabel = styled.label`
-    margin-bottom: 10px;
-    font-size: 16px;
-    color: #7e9e6c;
-`
-const Subject = styled.input`
-    all: unset;
-    height: 30px;
-    //border-radius: 5px;
-    border: solid 1px gray;
-    color: gray;
-    padding-left: 10px;
-    padding-right: 10px;
-`
 const MessageWrapper = styled.div`
     display: flex;
     flex-direction: column;
-    padding: 20px;
-    border-color: #7e9e6c;
-    border-radius: 10px;
+    gap: 20px;
+    
 `
-const MessageLabel = styled.label`
-    margin-bottom: 10px;
-    font-size: 16px;
-    color: #7e9e6c;
-`
+
 const Message = styled.textarea`
-    all: unset;
+    //margin-top: 30px;
+    padding: 10px;
+    height: 300px;
     resize: none;
-    height: 20vh;
-    //border-radius: 5px;
-    border: solid 1px gray;
+    font-size: 16px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     color: gray;
-    padding: 20px;
+    border: solid 1px #7e9e6c;
+    &:focus{
+        outline: none;
+    }
 `
 const FooterWrapper = styled.div`
     display: flex;
-    justify-content: flex-start;
-    gap: 20px;
-    align-items: center;
-    //height: 100px;
-    padding-right: 20px;
-    padding-left: 20px;
+    
 `
 const SendButton = styled.button`
 
@@ -436,4 +341,5 @@ const Spinner = styled(ImSpinner3)`
         }
     }
 `
+
 export default Contact;
