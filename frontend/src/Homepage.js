@@ -46,7 +46,6 @@ const HomepageWrapper = styled.div`
     justify-content: center;
     align-items: center;
 `
-
 const Image = styled.img`
     height: 95%;    
     border-radius: 5px;

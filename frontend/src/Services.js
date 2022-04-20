@@ -50,7 +50,6 @@ const Services = () => {
                             Le massage californien se distingue par ses longs mouvements fluides et enveloppants.<br></br><br></br>
                             Donné avec écoute, compassion et respect il favorise l’émergence de la mémoire corporelle ainsi qu’une grande détente.<br></br><br></br><br></br>
                             Les bienfaits :<br></br><br></br>
-
                             Douleurs chroniques<br></br>
                             Insomnie<br></br>
                             Maladies arthritiques<br></br>
@@ -110,7 +109,6 @@ const Services = () => {
                             Cette technique utilise des mouvements doux et circulaires qui dirigent la lymphe vers les ganglions lymphatiques , ce qui favorise le nettoyage, la désintoxication<br></br><br></br>
                             et le désengorgement du tissu conjonctif et des ganglions lymphatiques.<br></br><br></br><br></br>
                             Les bienfaits :<br></br><br></br>
-
                             Stimule le système immunitaire.<br></br>
                             Nettoie et décongestionne les tissus.<br></br>
                             Augmente la circulation lymphatique et sanguine.<br></br>
@@ -143,7 +141,6 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: center;
 `
-
 const Main = styled.div`
     height: 85vh;
     width: 98vw;
@@ -157,8 +154,7 @@ const ServicesArea = styled.div`
     display: grid;
     justify-content: center;    
     grid-template-columns: 20% 20% 10% 20% 20%;    
-    `
-
+`
 const ServiceWrapper = styled.div`
     background-color: #7e9e6c;
     border-radius: 5px;
@@ -169,8 +165,7 @@ const ServiceWrapper = styled.div`
     display: grid;
     grid-template-rows: 15% 60% 25%;
     justify-content: center;
-    align-items: center;
-    
+    align-items: center;    
 `
 const PlantImage = styled.img`
     width: 100px;
@@ -213,8 +208,6 @@ const PriceListArea = styled.div`
     
     align-items: center;
 `
-
-
 const PriceList = styled.p`
     color: white;    
     text-align: center;

@@ -40,22 +40,19 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: center;
 `
-
 const Main = styled.div`
     height: 85vh;
     width: 98vw;
     margin-top: 0px;
     border-radius: 0px 0px 15px 15px;
     background-color: white;
-    box-shadow: 1px 8px 8px #888888; 
-    
+    box-shadow: 1px 8px 8px #888888;
 `  
 const ConfirmationArea = styled.div`    
     height: 80vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    
 `
 const ConfirmationWrapper = styled.div`    
     background-color: #7e9e6c;
@@ -69,7 +66,6 @@ const ConfirmationWrapper = styled.div`
     gap: 40px;
     padding: 30px;
 `
-
 const SuccessIcon = styled(RiCheckboxCircleLine )`
     color: white;
 `
@@ -78,7 +74,6 @@ const Title = styled.p`
     color: white;
     font-variant-caps: small-caps;
 `
-
 const Text = styled.p`
     font-size: 24px;
     color: white;

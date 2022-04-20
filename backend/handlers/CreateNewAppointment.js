@@ -17,9 +17,8 @@ const createNewAppointment = async (req, res) => {
     try {
         await client.connect();
         const db = client.db("HBMT");
-        console.log(req.body.slot);
         
-
+        //searching existing appointments - if slot and therapist are not available for specified date, throwing an error
         const searchHistory = await db.collection("Appointments").find({
 
             "date": req.body.date,
@@ -27,8 +26,8 @@ const createNewAppointment = async (req, res) => {
             "therapist": req.body.therapist
         }).toArray();
 
-        console.log(searchHistory);
-
+        
+        //creating new appointment
         if (searchHistory.length === 0) {
 
             const result = await db.collection("Appointments").insertOne({

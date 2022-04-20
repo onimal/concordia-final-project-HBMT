@@ -8,7 +8,6 @@ import Homepage from "./Homepage";
 import Bio from "./Bio";
 import Services from "./Services";
 import Appointment from "./Appointment";
-import Confirmation from "./Confirmation";
 import Contact from "./Contact";
 
 function App() {

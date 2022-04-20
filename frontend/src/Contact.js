@@ -8,7 +8,7 @@ import { ImSpinner3 } from "react-icons/im";
 import { MdErrorOutline } from "react-icons/md"
 import { RiCheckboxCircleLine } from "react-icons/ri"
 
-
+//Google Maps API settings
 const containerStyle = {
     width: '500px',
     height: '300px'
@@ -27,13 +27,12 @@ const Contact = () => {
         })
     
 
-        // e-mail functionality built with the help of this source: https://w3collective.com/react-contact-form/
+        // e-mail functionality -  built with the help of this source: https://w3collective.com/react-contact-form/
         const [status, setStatus] = useState("idle");
 
         const handleSubmit = async (event) => {
             event.preventDefault();
             setStatus("sending");
-            //console.log(status);
             const {name, email, subject, message} = event.target.elements;
             let details = {
                 name: name.value,
@@ -53,7 +52,7 @@ const Contact = () => {
             let result = await response.json();
             
             setStatus(result.status)
-            //console.log(status);
+            
             event.target.reset();
         };
         
@@ -132,9 +131,6 @@ const Contact = () => {
                             </form>
                         </EmailFormWrapper>
                     </ContactArea>
-                
-                
-                
                 </Main>
             </Wrapper>
         )
@@ -148,7 +144,6 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: center;
 `
-
 const Main = styled.div`
     height: 85vh;
     width: 98vw;
@@ -174,7 +169,6 @@ const ContactInfoWrapper = styled.div`
     display: grid;
     justify-content: center;
     align-items: center;
-    
 `
 const PlantImage = styled.img`
     width: 100px;
@@ -182,7 +176,6 @@ const PlantImage = styled.img`
     align-self: center;
     opacity: 70%;
 `
-
 const TherapistsInfoArea = styled.div`
     display: flex;
     justify-content: space-evenly;
@@ -195,7 +188,6 @@ const TherapistInfoWrapper = styled.div`
     justify-content: center;
     align-items: center;
     gap: 10px;
-    
 `
 const TherapistName = styled.p`
     color: #7e9e6c;
@@ -206,7 +198,6 @@ const TherapistPhone = styled.p`
     color: #7e9e6c;
     font-size: 18px;
 `
-
 const TherapistEmail = styled.a`
     color: #7e9e6c;
     font-size: 18px;
@@ -220,8 +211,6 @@ const CenterInfo = styled.div`
     height: 55vh;
     display: grid;
     grid-template-rows: 30% 70%;
-    
-    
 `
 const CenterInfoWrapper = styled.div`
     display: flex;
@@ -234,14 +223,12 @@ const CenterName = styled.p`
     color: #7e9e6c;
     font-size: 24px;
     font-variant-caps: small-caps;
-    text-align: center;
-    
+    text-align: center;    
 `
 const CenterAddress = styled.p`
     color: #7e9e6c;
     font-size: 18px;
 `
-
 const CenterPhone = styled.p`
     color: #7e9e6c;
     font-size: 18px;
@@ -261,7 +248,6 @@ const EmailFormWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    //gap: 20px;
 `
 const Title = styled.p`
     font-size: 24px;
@@ -298,7 +284,6 @@ const MessageWrapper = styled.div`
 `
 
 const Message = styled.textarea`
-    //margin-top: 30px;
     padding: 10px;
     height: 300px;
     resize: none;
@@ -314,12 +299,9 @@ const FooterWrapper = styled.div`
     margin-top: 10px;;
     display: grid;
     grid-template-columns: 50% 50%;
-    //justify-content: space-between;
     align-items: center;
-    
 `
 const SendButton = styled.button`
-
     all: unset;
     cursor: pointer;
     height: 50px;
@@ -334,8 +316,7 @@ const SendButton = styled.button`
     :hover{
         color: whitesmoke;
         background-color: #7e9e6c;        
-    }
-    
+    }    
 `
 const ErrorIcon = styled(MdErrorOutline )`
     color: #f54248;
