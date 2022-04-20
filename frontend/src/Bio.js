@@ -66,7 +66,6 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: center;
 `
-
 const Main = styled.div`
     height: 85vh;
     width: 98vw;
@@ -81,7 +80,6 @@ const BioArea = styled.div`
     justify-content: center;    
     grid-template-columns: 40% 10% 40%;    
 `
-
 const BioWrapper = styled.div`    
     background-color: #7e9e6c;
     border-radius: 5px;
@@ -107,20 +105,17 @@ const Image = styled.img`
     width: 50%;
     border-radius: 5px;    
 `
-
 const Separator = styled.div`
     border: solid 1px whitesmoke;
     width: 50%;
     
 `
-
 const TextWrapper = styled.div`    
     height: 100%;
     width: 90%;
     justify-self: center;
     align-self: center;
 `
-
 const Name = styled.p`
     font-size: 24px;
     color: white;

@@ -22,6 +22,7 @@ import Confirmation from "./Confirmation";
 
 const Appointment = () => {
 
+    //initializing states
     const [status, setStatus] = useState("idle");
     const [customerCreationStatus, setCustomerCreationStatus] = useState("")
     const [dialog, setDialog] = useState("");
@@ -47,7 +48,7 @@ const Appointment = () => {
 
 
     
-
+    //onChange inputs functions
     const handleCustomerLastNameChange = (event) => {
         setCustomerLastName(event.target.value);        
     };
@@ -65,8 +66,7 @@ const Appointment = () => {
     };
 
     const handleCustomerAddressChange = (event) => {
-        setCustomerAddress(event.target.value); 
-        console.log(event.target.value)
+        setCustomerAddress(event.target.value);
     };
 
     const handleCustomerZipCodeChange = (event) => {
@@ -85,6 +85,7 @@ const Appointment = () => {
         setSelectedDate(date._d);
     };
 
+    //providing time labels for the Confirmation page
     const handleSlotChange = (event) => {
         event.preventDefault();
         setSelectedSlot(event.target.value);
@@ -117,9 +118,9 @@ const Appointment = () => {
                 setSlotLabel("18 heures");
                 break;
         }
-        console.log (slotLabel);
     };
     
+    //poviding location labels for the Confirmation page
     const handleLocationChange = (event) => {
         setSelectedLocation(event.target.value);
         if (event.target.value === "Clinic") {
@@ -127,7 +128,6 @@ const Appointment = () => {
         } else if (event.target.value === "Home") {
             setLocationLabel(`${customerAddress}, ${customerCity}, ${customerZipCode}`)
         }
-        console.log(locationLabel);
     };
 
     
@@ -144,6 +144,7 @@ const Appointment = () => {
         setSelectedDuration(event.target.value);
     };
 
+    //submitting new appointment - sending appointmen data to the backend
     const submitNewAppointment = (event) => {
         event.preventDefault();
         
@@ -179,6 +180,7 @@ const Appointment = () => {
                         } else if(res.status === 201) {
                             setStatus("success")
                             setDialog("Votre rendez-vous est confirmé, merci !")
+                            //customer data form reset on success
                             setCustomerLastName("");
                             setCustomerFirstName("");
                             setCustomerEmail("");
@@ -193,6 +195,7 @@ const Appointment = () => {
                     setStatus("error");
                 })
             
+            // sending customer data to the backend
             fetch('/customers', {
                 method: "POST",
                 headers: {
@@ -226,14 +229,14 @@ const Appointment = () => {
                 .catch((error) => {
                     setStatus("error");
                 })
-
+        //form reset
         event.target.reset();
         
         
     };
 
 
-
+    //displaying Confirmation page on success
     if (status === "success") {
 
         
@@ -247,6 +250,7 @@ const Appointment = () => {
 
     } else {
 
+        //rendering Appointment page
         return (
 
             <Wrapper>
@@ -453,7 +457,6 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: center;
 `
-
 const Main = styled.div`
     height: 85vh;
     width: 98vw;
@@ -477,8 +480,7 @@ const FormLeftWrapper = styled.div`
     justify-self: center;
     align-self: center;
     display: grid;
-    justify-content: center;
-    
+    justify-content: center;    
 `
 const FormRightWrapper = styled.div`    
     border: solid 1px #7e9e6c;
@@ -558,7 +560,6 @@ const DialogWrapper = styled.div`
     align-items: center;
     gap: 10px;
 `
-
 const Spinner = styled(ImSpinner3)`
     animation-name: spin;
     animation-duration: 4000ms;
@@ -582,15 +583,7 @@ const ErrorMsg = styled.p`
     font-size: 18px;
     color: #f54248;
 `
-const SuccessIcon = styled(RiCheckboxCircleLine )`
-    color: #629147;
-`
-const ConfirmationMsg = styled.p`
-    font-size: 18px;
-    color: #629147;
-`
 const BookButton = styled.button`
-
     all: unset;
     justify-self: center;
     cursor: pointer;
@@ -615,8 +608,7 @@ const BookButton = styled.button`
 `
 const PickersWrapper = styled.div`
     display:flex;
-    justify-content: space-evenly;
-`
+    justify-content: space-evenly;`
 
 const RadioGroupWrapper = styled.div`
     display: flex;
@@ -624,7 +616,6 @@ const RadioGroupWrapper = styled.div`
     justify-self: center;
     gap: 20px;
 `
-
 const RadioWrapper = styled.div`
     display: flex;
     align-items: center;

@@ -1,6 +1,6 @@
 
 
-
+// e-mail functionality -  built with the help of this source: https://w3collective.com/react-contact-form/
 const sendEmail = async (req, res) => {
 
     const name = req.body.name;

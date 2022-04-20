@@ -22,7 +22,6 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: center;
 `
-
 const HeaderWrapper = styled.div`
     height: 10vh;
     width: 98vw;
@@ -46,9 +45,7 @@ const WelcomeLink = styled(NavLink)`
         text-underline-offset: 10px;
     }
 `
-
 const BioLink = styled(NavLink)`
-
     text-decoration: none;
     color: gray;
     font-size: 20px;
@@ -60,7 +57,6 @@ const BioLink = styled(NavLink)`
     }
 `
 const MassageTypesLink = styled(NavLink)`
-
     text-decoration: none;
     color: gray;
     font-size: 20px;

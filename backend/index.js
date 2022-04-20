@@ -48,9 +48,6 @@ express()
     .use(helmet())
     .use(cors())
 
-    
-    
-
     //endpoints
     .get('/appointments', getAppointments)    
     .post('/appointments', createNewAppointment)

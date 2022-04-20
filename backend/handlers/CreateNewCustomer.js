@@ -14,6 +14,7 @@ const createNewCustomer = async (req, res) => {
 
     const client = new MongoClient(MONGO_URI, options)
 
+    //searching exisiting customers - if already exists, no creation
     try {
         await client.connect();
         const db = client.db("HBMT");
